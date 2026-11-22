@@ -736,7 +736,7 @@ END;</div>
 
                 <div style="background: #eff6ff; border: 1px solid #bfdbfe; padding: 18px; border-radius: 8px; margin-bottom: 20px;">
                     <h3 style="color: #1e40af; margin-bottom: 8px;">Download Official Submission Files:</h3>
-                    <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+                    <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 16px;">
                         <a href="/download/presentation.pptx" class="btn-download-hero" download="BIT3360_Database_Security_Presentation.pptx">
                             &#128190; Download PowerPoint Presentation (.pptx)
                         </a>
@@ -747,32 +747,43 @@ END;</div>
                             &#127760; View Slides in Browser
                         </a>
                     </div>
+
+                    <h4 style="color: #1e40af; margin-bottom: 8px; border-top: 1px solid #bfdbfe; padding-top: 12px;">Download Individual Member Word Scripts (.docx):</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px;">
+                        <a href="/download/script_1.docx" class="btn-primary" style="background: #0284c7; text-decoration: none; padding: 8px 12px; font-size: 0.88rem;" download="SCRIPT_1_Comfort_Penyengwe.docx">
+                            &#128196; Comfort Penyengwe Script (.docx)
+                        </a>
+                        <a href="/download/script_2.docx" class="btn-primary" style="background: #16a34a; text-decoration: none; padding: 8px 12px; font-size: 0.88rem;" download="SCRIPT_2_Gideon_Namuya.docx">
+                            &#128196; Gideon Namuya Script (.docx)
+                        </a>
+                        <a href="/download/script_3.docx" class="btn-primary" style="background: #d97706; text-decoration: none; padding: 8px 12px; font-size: 0.88rem;" download="SCRIPT_3_Lubuto_Matambo.docx">
+                            &#128196; Lubuto Matambo Script (.docx)
+                        </a>
+                        <a href="/download/script_4.docx" class="btn-primary" style="background: #db2777; text-decoration: none; padding: 8px 12px; font-size: 0.88rem;" download="SCRIPT_4_Lamla_Mwanza.docx">
+                            &#128196; Lamla Mwanza Script (.docx)
+                        </a>
+                    </div>
                 </div>
 
                 <div style="display: flex; flex-direction: column; gap: 14px;">
                     <div style="background: #f0f7ff; border-left: 4px solid var(--accent); padding: 14px; border-radius: 6px;">
-                        <strong>Member 1 (Introduction & Threats):</strong>
-                        <p style="margin-top: 4px; font-size: 0.92rem;">Introduce ZUT Student Information System (`zut_student_records`). Explain the CIA triad (Confidentiality, Integrity, Availability) and the real-world dangers of grade tampering and SQL injection breaches.</p>
+                        <strong>Speaker 1: Comfort Penyengwe (Student ID: 2410098) — Part 1: Foundations & Threats (Slides 1 to 3)</strong>
+                        <p style="margin-top: 4px; font-size: 0.92rem;">Introduce the group and ZUT Student Information System (`zut_student_records`). Explain the CIA triad (Confidentiality, Integrity, Availability) and the real-world dangers of grade tampering and SQL injection breaches. Hands over to Gideon.</p>
                     </div>
 
                     <div style="background: #f0fdf4; border-left: 4px solid var(--success); padding: 14px; border-radius: 6px;">
-                        <strong>Member 2 (Defensive Concepts):</strong>
-                        <p style="margin-top: 4px; font-size: 0.92rem;">Explain Role-Based Access Control (RBAC) and Least Privilege. Explain why Parameterized Queries are the gold standard defense against SQL injection (separating Code from Data).</p>
+                        <strong>Speaker 2: Gideon Namuya (Student ID: 2410149) — Part 2: Defensive Controls (Slides 4 to 6)</strong>
+                        <p style="margin-top: 4px; font-size: 0.92rem;">Explain Role-Based Access Control (RBAC) and Least Privilege (Admin vs Lecturer vs Student). Explain why Parameterized Queries completely neutralize SQL injection, and how password hashing and audit triggers protect data. Hands over to Lubuto.</p>
                     </div>
 
                     <div style="background: #fffbeb; border-left: 4px solid var(--warning); padding: 14px; border-radius: 6px;">
-                        <strong>Member 3 (Architecture & Schema):</strong>
-                        <p style="margin-top: 4px; font-size: 0.92rem;">Walk through the relational tables: `students` (with `nrc`), `courses`, `grades`, and `audit_log`. Explain the three user accounts: `sec_admin`, `sec_lecturer`, and `sec_student`.</p>
+                        <strong>Speaker 3: Lubuto Matambo (Student ID: 2410171) — Part 3: Architecture & Law (Slides 7 to 9)</strong>
+                        <p style="margin-top: 4px; font-size: 0.92rem;">Walk through enterprise security tools (MySQL Firewall, TDE, Vault). Explain legal requirements under the <strong>Zambia Data Protection Act No. 3 of 2021</strong>, and explain the database schema (students with NRC, courses, grades, audit_log). Hands over to Lamla.</p>
                     </div>
 
                     <div style="background: #fdf2f8; border-left: 4px solid #db2777; padding: 14px; border-radius: 6px;">
-                        <strong>Member 4 (Live Demonstration):</strong>
-                        <p style="margin-top: 4px; font-size: 0.92rem;">Operate this web portal live! Click Tab 1 to show the `Access Denied` error for students and reveal the underlying SQL query. Click Tab 2 to demonstrate the SQL Injection attack vs Parameterized query defense. Click Tab 3 to show the audit trail.</p>
-                    </div>
-
-                    <div style="background: #f8fafc; border-left: 4px solid #475569; padding: 14px; border-radius: 6px;">
-                        <strong>Member 5 (Evaluation & Compliance):</strong>
-                        <p style="margin-top: 4px; font-size: 0.92rem;">Summarize project challenges (audit overhead, permission maintenance) and highlight compliance with the <strong>Zambia Data Protection Act of 2021</strong>.</p>
+                        <strong>Speaker 4: Lamla Mwanza (Student ID: 2410205) — Part 4: Live Demonstration & Wrap-Up (Slides 10 to 12)</strong>
+                        <p style="margin-top: 4px; font-size: 0.92rem;">Operate this web portal live! Click Tab 1 to show the `Access Denied` error for students. Click Tab 2 to demonstrate the SQL Injection attack vs Parameterized query defense. Click Tab 3 to show the audit trail, and present the conclusion!</p>
                     </div>
                 </div>
             </div>
@@ -963,16 +974,44 @@ class SecurityAppHandler(http.server.SimpleHTTPRequestHandler):
 
         # Download Endpoints
         if parsed.path == "/download/presentation.pptx":
-            if os.path.exists(PPTX_FILE):
+            pptx_target = PPTX_FILE
+            if os.path.exists("BIT3360_Database_Security_Presentation_Updated.pptx"):
+                pptx_target = "BIT3360_Database_Security_Presentation_Updated.pptx"
+            elif not os.path.exists(pptx_target):
+                pptx_target = None
+
+            if pptx_target and os.path.exists(pptx_target):
                 self.send_response(200)
                 self.send_header("Content-Type", "application/vnd.openxmlformats-officedocument.presentationml.presentation")
-                self.send_header("Content-Disposition", f'attachment; filename="{PPTX_FILE}"')
-                self.send_header("Content-Length", str(os.path.getsize(PPTX_FILE)))
+                self.send_header("Content-Disposition", 'attachment; filename="BIT3360_Database_Security_Presentation.pptx"')
+                self.send_header("Content-Length", str(os.path.getsize(pptx_target)))
                 self.end_headers()
-                with open(PPTX_FILE, "rb") as f:
+                with open(pptx_target, "rb") as f:
                     self.wfile.write(f.read())
             else:
                 self.send_error(404, "PPTX File Not Found")
+            return
+
+        # Word Document Scripts for Members
+        script_files = {
+            "/download/script_1.docx": ("SCRIPT_1_Comfort_Penyengwe.docx", "SCRIPT_1_Comfort_Penyengwe.docx"),
+            "/download/script_2.docx": ("SCRIPT_2_Gideon_Namuya.docx", "SCRIPT_2_Gideon_Namuya.docx"),
+            "/download/script_3.docx": ("SCRIPT_3_Lubuto_Matambo.docx", "SCRIPT_3_Lubuto_Matambo.docx"),
+            "/download/script_4.docx": ("SCRIPT_4_Lamla_Mwanza.docx", "SCRIPT_4_Lamla_Mwanza.docx")
+        }
+
+        if parsed.path in script_files:
+            file_on_disk, out_name = script_files[parsed.path]
+            if os.path.exists(file_on_disk):
+                self.send_response(200)
+                self.send_header("Content-Type", "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+                self.send_header("Content-Disposition", f'attachment; filename="{out_name}"')
+                self.send_header("Content-Length", str(os.path.getsize(file_on_disk)))
+                self.end_headers()
+                with open(file_on_disk, "rb") as f:
+                    self.wfile.write(f.read())
+            else:
+                self.send_error(404, "Script File Not Found")
             return
 
         if parsed.path == "/download/database_security.sql":
