@@ -549,7 +549,7 @@ INDEX_HTML = """<!DOCTYPE html>
         <button class="tab-btn" onclick="switchTab('sqli')">2. SQL Injection vs Parameterized Queries</button>
         <button class="tab-btn" onclick="switchTab('audit')">3. Tamper-Evident Audit Trail & Triggers</button>
         <button class="tab-btn" onclick="switchTab('sql-source')">4. Full SQL Schema & Source Viewer</button>
-        <button class="tab-btn" onclick="switchTab('guide')">5. Viva Script & Downloads</button>
+        <button class="tab-btn" onclick="switchTab('guide')">5. Presentation & Submission Files</button>
     </div>
 
     <main class="container">
@@ -725,18 +725,18 @@ END;</div>
         </div>
 
         <!-- ========================================== -->
-        <!-- TAB 5: VIVA SCRIPT & DOWNLOADS -->
+        <!-- TAB 5: PRESENTATION & SUBMISSION FILES -->
         <!-- ========================================== -->
         <div id="tab-guide" class="tab-pane">
             <div class="card">
                 <div class="card-header">
-                    <h2>Group Presentation Speaking Breakdown & Submission Files</h2>
-                    <p>Quick reference for each group member during the live panel presentation.</p>
+                    <h2>Project Overview & Official Submission Deliverables</h2>
+                    <p>Official course materials and presentation deliverables for BIT3360: Advanced Databases.</p>
                 </div>
 
                 <div style="background: #eff6ff; border: 1px solid #bfdbfe; padding: 18px; border-radius: 8px; margin-bottom: 20px;">
                     <h3 style="color: #1e40af; margin-bottom: 8px;">Download Official Submission Files:</h3>
-                    <div style="display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 16px;">
+                    <div style="display: flex; gap: 14px; flex-wrap: wrap;">
                         <a href="/download/presentation.pptx" class="btn-download-hero" download="BIT3360_Database_Security_Presentation.pptx">
                             &#128190; Download PowerPoint Presentation (.pptx)
                         </a>
@@ -747,43 +747,27 @@ END;</div>
                             &#127760; View Slides in Browser
                         </a>
                     </div>
-
-                    <h4 style="color: #1e40af; margin-bottom: 8px; border-top: 1px solid #bfdbfe; padding-top: 12px;">Download Individual Member Word Scripts (.docx):</h4>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px;">
-                        <a href="/download/script_1.docx" class="btn-primary" style="background: #0284c7; text-decoration: none; padding: 8px 12px; font-size: 0.88rem;" download="SCRIPT_1_Comfort_Penyengwe.docx">
-                            &#128196; Comfort Penyengwe Script (.docx)
-                        </a>
-                        <a href="/download/script_2.docx" class="btn-primary" style="background: #16a34a; text-decoration: none; padding: 8px 12px; font-size: 0.88rem;" download="SCRIPT_2_Gideon_Namuya.docx">
-                            &#128196; Gideon Namuya Script (.docx)
-                        </a>
-                        <a href="/download/script_3.docx" class="btn-primary" style="background: #d97706; text-decoration: none; padding: 8px 12px; font-size: 0.88rem;" download="SCRIPT_3_Lubuto_Matambo.docx">
-                            &#128196; Lubuto Matambo Script (.docx)
-                        </a>
-                        <a href="/download/script_4.docx" class="btn-primary" style="background: #db2777; text-decoration: none; padding: 8px 12px; font-size: 0.88rem;" download="SCRIPT_4_Lamla_Mwanza.docx">
-                            &#128196; Lamla Mwanza Script (.docx)
-                        </a>
-                    </div>
                 </div>
 
                 <div style="display: flex; flex-direction: column; gap: 14px;">
-                    <div style="background: #f0f7ff; border-left: 4px solid var(--accent); padding: 14px; border-radius: 6px;">
-                        <strong>Speaker 1: Comfort Penyengwe (Student ID: 2410098) — Part 1: Foundations & Threats (Slides 1 to 3)</strong>
-                        <p style="margin-top: 4px; font-size: 0.92rem;">Introduce the group and ZUT Student Information System (`zut_student_records`). Explain the CIA triad (Confidentiality, Integrity, Availability) and the real-world dangers of grade tampering and SQL injection breaches. Hands over to Gideon.</p>
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid var(--accent); padding: 16px; border-radius: 6px;">
+                        <h4 style="color: var(--accent); margin-bottom: 6px;">1. Role-Based Access Control (RBAC) Architecture</h4>
+                        <p style="font-size: 0.92rem; color: #475569;">Implements the Principle of Least Privilege across three institutional tiers: <code>sec_admin</code> (Full DDL/DML maintenance), <code>sec_lecturer</code> (Authorized grade entry; prohibited from destructive DDL), and <code>sec_student</code> (Confidential masked view access via <code>vw_student_grades</code>; NRC numbers masked; unauthorized write operations blocked with Error 1142).</p>
                     </div>
 
-                    <div style="background: #f0fdf4; border-left: 4px solid var(--success); padding: 14px; border-radius: 6px;">
-                        <strong>Speaker 2: Gideon Namuya (Student ID: 2410149) — Part 2: Defensive Controls (Slides 4 to 6)</strong>
-                        <p style="margin-top: 4px; font-size: 0.92rem;">Explain Role-Based Access Control (RBAC) and Least Privilege (Admin vs Lecturer vs Student). Explain why Parameterized Queries completely neutralize SQL injection, and how password hashing and audit triggers protect data. Hands over to Lubuto.</p>
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid var(--success); padding: 16px; border-radius: 6px;">
+                        <h4 style="color: var(--success); margin-bottom: 6px;">2. SQL Injection Defense Mechanism</h4>
+                        <p style="font-size: 0.92rem; color: #475569;">Demonstrates why naive string concatenation is susceptible to query tampering (e.g., tautology injection <code>' OR '1'='1</code>), and proves the absolute efficacy of pre-compiled parameterized queries (prepared statements) that treat all user input strictly as literal data.</p>
                     </div>
 
-                    <div style="background: #fffbeb; border-left: 4px solid var(--warning); padding: 14px; border-radius: 6px;">
-                        <strong>Speaker 3: Lubuto Matambo (Student ID: 2410171) — Part 3: Architecture & Law (Slides 7 to 9)</strong>
-                        <p style="margin-top: 4px; font-size: 0.92rem;">Walk through enterprise security tools (MySQL Firewall, TDE, Vault). Explain legal requirements under the <strong>Zambia Data Protection Act No. 3 of 2021</strong>, and explain the database schema (students with NRC, courses, grades, audit_log). Hands over to Lamla.</p>
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid var(--warning); padding: 16px; border-radius: 6px;">
+                        <h4 style="color: var(--warning); margin-bottom: 6px;">3. Automated Tamper-Evident Audit Logging</h4>
+                        <p style="font-size: 0.92rem; color: #475569;">Enforces non-repudiation and insider threat detection via automatic database engine triggers (<code>trg_grades_audit_update</code>). All mark modifications record the exact timestamp, user session identity, previous score, and new score.</p>
                     </div>
 
-                    <div style="background: #fdf2f8; border-left: 4px solid #db2777; padding: 14px; border-radius: 6px;">
-                        <strong>Speaker 4: Lamla Mwanza (Student ID: 2410205) — Part 4: Live Demonstration & Wrap-Up (Slides 10 to 12)</strong>
-                        <p style="margin-top: 4px; font-size: 0.92rem;">Operate this web portal live! Click Tab 1 to show the `Access Denied` error for students. Click Tab 2 to demonstrate the SQL Injection attack vs Parameterized query defense. Click Tab 3 to show the audit trail, and present the conclusion!</p>
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-left: 4px solid #6366f1; padding: 16px; border-radius: 6px;">
+                        <h4 style="color: #6366f1; margin-bottom: 6px;">4. Regulatory Compliance</h4>
+                        <p style="font-size: 0.92rem; color: #475569;">Directly complies with the <strong>Zambia Data Protection Act No. 3 of 2021</strong>, establishing technical security safeguards to prevent the unauthorized processing, disclosure, or destruction of student National Registration Card (NRC) records.</p>
                     </div>
                 </div>
             </div>
@@ -992,27 +976,6 @@ class SecurityAppHandler(http.server.SimpleHTTPRequestHandler):
                 self.send_error(404, "PPTX File Not Found")
             return
 
-        # Word Document Scripts for Members
-        script_files = {
-            "/download/script_1.docx": ("SCRIPT_1_Comfort_Penyengwe.docx", "SCRIPT_1_Comfort_Penyengwe.docx"),
-            "/download/script_2.docx": ("SCRIPT_2_Gideon_Namuya.docx", "SCRIPT_2_Gideon_Namuya.docx"),
-            "/download/script_3.docx": ("SCRIPT_3_Lubuto_Matambo.docx", "SCRIPT_3_Lubuto_Matambo.docx"),
-            "/download/script_4.docx": ("SCRIPT_4_Lamla_Mwanza.docx", "SCRIPT_4_Lamla_Mwanza.docx")
-        }
-
-        if parsed.path in script_files:
-            file_on_disk, out_name = script_files[parsed.path]
-            if os.path.exists(file_on_disk):
-                self.send_response(200)
-                self.send_header("Content-Type", "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
-                self.send_header("Content-Disposition", f'attachment; filename="{out_name}"')
-                self.send_header("Content-Length", str(os.path.getsize(file_on_disk)))
-                self.end_headers()
-                with open(file_on_disk, "rb") as f:
-                    self.wfile.write(f.read())
-            else:
-                self.send_error(404, "Script File Not Found")
-            return
 
         if parsed.path == "/download/database_security.sql":
             if os.path.exists(SQL_FILE):

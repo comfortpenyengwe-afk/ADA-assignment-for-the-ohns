@@ -3,3 +3,11 @@ __pycache__/
 .vscode/
 .idea/
 ~$*
+
+# Speaker scripts & internal cheat sheets (distributed privately to members)
+*.docx
+SCRIPT_*.docx
+build_member_docx_scripts.py
+PRESENTATION_GUIDE.md
+PRESENTATION_CHEATSHEET.md
+*_Updated.pptx
