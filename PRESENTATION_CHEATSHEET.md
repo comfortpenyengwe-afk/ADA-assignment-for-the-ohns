@@ -1,5 +1,9 @@
 # BIT3360 DATABASE SECURITY — QUICK PRESENTATION CHEAT SHEET
-**Use this guide to brief your groupmates and practice before Thursday!**
+**Group Members:**
+1. **Comfort Penyengwe** — Student ID: 2310385966 (Speaker 1)
+2. **Lubuto Matambo** — Student ID: 2310385922 (Speaker 2)
+3. **Lamla Mwanza** — Student ID: 2310385945 (Speaker 3)
+4. **Gideon Namuya** — Student ID: 2310385918 (Speaker 4)
 
 ---
 
@@ -38,11 +42,11 @@ If a university database is not secured:
 
 ---
 
-## 3. Who Says What (Divided for 4 Group Members)
+## 3. Who Says What (Assigned for Comfort, Lubuto, Lamla, and Gideon)
 
-### 👤 MEMBER 1: Foundations & Threats (Slides 1 to 3)
+### 👤 SPEAKER 1: Comfort Penyengwe — Foundations & Threats (Slides 1 to 3)
 * **What you say:**
-  > *"Good morning Lecturer. Today our group presents our project on Database Security. Databases hold an institution's most sensitive data—including student exam marks and confidential NRC numbers.*
+  > *"Good morning Lecturer. Today our group—Comfort Penyengwe, Lubuto Matambo, Lamla Mwanza, and Gideon Namuya—presents our project on Database Security under BIT3360. Databases hold an institution's most sensitive data—including student exam marks and confidential NRC numbers.*
   > 
   > *Database security is governed by the **CIA Triad**:*
   > * **Confidentiality:** *Keeping private data (like student NRCs) hidden from unauthorized people.*
@@ -53,25 +57,25 @@ If a university database is not secured:
   > 1. **SQL Injection:** *When an attacker types SQL syntax into a web input to trick the database into dumping all records.*
   > 2. **Privilege Abuse:** *Giving regular users too much power—like a student having permission to edit marks.*
   > 
-  > *Now Member 2 will explain our defenses."*
+  > *Now Lubuto Matambo will explain our defenses."*
 
 ---
 
-### 👤 MEMBER 2: How We Defend Databases (Slides 4 to 6)
+### 👤 SPEAKER 2: Lubuto Matambo — How We Defend Databases (Slides 4 to 6)
 * **What you say:**
-  > *"Thank you Member 1. To defend against these threats, we implement 3 core mechanisms:*
+  > *"Thank you Comfort. To defend against these threats, we implement 3 core mechanisms:*
   > 
   > 1. **Role-Based Access Control & Least Privilege:** *Users only get the minimum permissions needed for their job. An Admin has full control; a Lecturer can only update marks; a Student has read-only access. If a student tries to change a mark, the database blocks it with an Error 1142 Access Denied.*
   > 2. **Parameterized Queries (Prepared Statements):** *This is the #1 defense against SQL Injection. The database compiles the SQL code FIRST. When user input arrives, it is treated strictly as plain text data, never as executable code.*
   > 3. **Data Encryption & Audit Triggers:** *Passwords are hashed using SHA-256 with salt so they cannot be reversed. And to stop insider fraud, we created an automatic database trigger that records every grade change in an audit log.*
   > 
-  > *Now Member 3 will explain our system design."*
+  > *Now Lamla Mwanza will explain our system design."*
 
 ---
 
-### 👤 MEMBER 3: Tools, Law & Architecture (Slides 7 to 9)
+### 👤 SPEAKER 3: Lamla Mwanza — Tools, Law & Architecture (Slides 7 to 9)
 * **What you say:**
-  > *"Thank you Member 2. In large corporations, database security is handled by enterprise tools like MySQL Enterprise Firewall (which blocks malicious queries in real time) and HashiCorp Vault (which rotates passwords automatically).*
+  > *"Thank you Lubuto. In large corporations, database security is handled by enterprise tools like MySQL Enterprise Firewall (which blocks malicious queries in real time) and HashiCorp Vault (which rotates passwords automatically).*
   > 
   > *In Zambia, under the **Data Protection Act No. 3 of 2021**, institutions that handle personal records like NRC numbers are legally required to enforce technical safeguards.*
   > 
@@ -81,11 +85,11 @@ If a university database is not secured:
   > * `grades` *(marks, letter grades)*
   > * `audit_log` *(automated trail of all changes)*
   > 
-  > *We created 3 database users: `sec_admin`, `sec_lecturer`, and `sec_student`. Now Member 4 will show you our live demonstration."*
+  > *We created 3 database users: `sec_admin`, `sec_lecturer`, and `sec_student`. Now Gideon Namuya will show you our live demonstration."*
 
 ---
 
-### 👤 MEMBER 4: The Live Demonstration & Wrap-up (Slides 10 to 12)
+### 👤 SPEAKER 4: Gideon Namuya — The Live Demonstration & Wrap-up (Slides 10 to 12)
 * **What you do and say on screen (`http://localhost:5000`):**
 
   1. **Click Tab 1 (Access Control):**
@@ -108,7 +112,7 @@ If a university database is not secured:
        > *"Here is our `audit_log` table. The database trigger automatically recorded who made the change (`sec_lecturer`), the timestamp, the previous mark, and the new mark for complete non-repudiation."*
 
   4. **Wrap-up (Slide 12):**
-     > *"In conclusion, database security protects institutional integrity and ensures compliance with the Zambia Data Protection Act. Thank you, and our group is now ready to answer any questions!"*
+     > *"In conclusion, database security protects institutional integrity and ensures compliance with the Zambia Data Protection Act. Thank you, and Comfort, Lubuto, Lamla, and I are now ready to answer any questions!"*
 
 ---
 

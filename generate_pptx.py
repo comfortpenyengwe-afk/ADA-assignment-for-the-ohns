@@ -2,7 +2,7 @@
 =====================================================================
 ZAMBIA UNIVERSITY COLLEGE OF TECHNOLOGY (ZUT)
 BIT3360: ADVANCED DATABASES - PPTX GENERATOR (SIMPLIFIED & EXPLANATORY)
-Customized for a 4-Member Group
+Group of 4: Comfort Penyengwe, Lubuto Matambo, Lamla Mwanza, Gideon Namuya
 Generates: BIT3360_Database_Security_Presentation.pptx
 =====================================================================
 """
@@ -108,7 +108,7 @@ def create_deck():
         tf.text = notes
 
     # =========================================================
-    # SLIDE 1: Title Slide (Group of 4)
+    # SLIDE 1: Title Slide (Featuring the 4 Group Members)
     # =========================================================
     s1 = prs.slides.add_slide(blank_layout)
     bg = s1.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(0), Inches(0), Inches(13.333), Inches(7.5))
@@ -116,48 +116,84 @@ def create_deck():
     bg.fill.fore_color.rgb = DARK_BLUE
     bg.line.fill.background()
 
-    tb = s1.shapes.add_textbox(Inches(1.2), Inches(1.5), Inches(10.9), Inches(4.5))
-    tf = tb.text_frame
-    tf.word_wrap = True
+    # Title & Header
+    tb_title = s1.shapes.add_textbox(Inches(0.8), Inches(0.6), Inches(11.7), Inches(2.2))
+    tf_title = tb_title.text_frame
+    tf_title.word_wrap = True
+    tf_title.margin_left = tf_title.margin_top = tf_title.margin_right = tf_title.margin_bottom = 0
 
-    p0 = tf.paragraphs[0]
+    p0 = tf_title.paragraphs[0]
     p0.text = "ZAMBIA UNIVERSITY COLLEGE OF TECHNOLOGY (ZUT)"
     p0.font.size = Pt(13)
     p0.font.bold = True
     p0.font.color.rgb = RGBColor(56, 189, 248)
 
-    p1 = tf.add_paragraph()
+    p1 = tf_title.add_paragraph()
     p1.text = "BIT3360: Advanced Databases — Group Assignment"
-    p1.font.size = Pt(16)
+    p1.font.size = Pt(15)
     p1.font.color.rgb = WHITE
-    p1.space_before = Pt(6)
+    p1.space_before = Pt(4)
 
-    p2 = tf.add_paragraph()
+    p2 = tf_title.add_paragraph()
     p2.text = "Database Security & Practical Protection Prototype"
-    p2.font.size = Pt(30)
+    p2.font.size = Pt(28)
     p2.font.bold = True
     p2.font.color.rgb = WHITE
-    p2.space_before = Pt(14)
+    p2.space_before = Pt(8)
 
-    p3 = tf.add_paragraph()
+    p3 = tf_title.add_paragraph()
     p3.text = "Demonstrating Role-Based Access Control, SQL Injection Defense & Audit Logging"
-    p3.font.size = Pt(16)
+    p3.font.size = Pt(15)
     p3.font.color.rgb = RGBColor(203, 213, 225)
-    p3.space_before = Pt(8)
+    p3.space_before = Pt(6)
 
-    p4 = tf.add_paragraph()
-    p4.text = "Presented by (Group of 4):\n• Member 1: Project Foundations & Threat Landscape\n• Member 2: Defensive Mechanisms & Query Protection\n• Member 3: Architecture, Tools & ZUT Prototype Design\n• Member 4: Live Prototype Demonstration & Project Evaluation"
-    p4.font.size = Pt(12.5)
-    p4.font.color.rgb = RGBColor(148, 163, 184)
-    p4.space_before = Pt(22)
+    # 4 Group Member Badges / Cards
+    members_data = [
+        ("Comfort Penyengwe", "ID: 2310385966", "Speaker 1: Foundations & Threats (Slides 1 - 3)", Inches(0.8), Inches(3.2)),
+        ("Lubuto Matambo", "ID: 2310385922", "Speaker 2: Defensive Mechanisms & Query Protection (Slides 4 - 6)", Inches(6.8), Inches(3.2)),
+        ("Lamla Mwanza", "ID: 2310385945", "Speaker 3: Architecture & System Design (Slides 7 - 9)", Inches(0.8), Inches(5.1)),
+        ("Gideon Namuya", "ID: 2310385918", "Speaker 4: Live Demo & Conclusion (Slides 10 - 12)", Inches(6.8), Inches(5.1))
+    ]
 
-    add_notes(s1, "Member 1 (Intro): 'Good morning/afternoon, Lecturer and colleagues. Today our group of 4 will present our BIT3360 project on Database Security. Databases hold an organization's most sensitive information. We will explain how databases are attacked, how we defend them, and show you a working prototype we built for a University Student Information System.'")
+    for name, sid, role, left, top in members_data:
+        m_card = s1.shapes.add_shape(MSO_SHAPE.ROUNDED_RECTANGLE, left, top, Inches(5.7), Inches(1.5))
+        m_card.fill.solid()
+        m_card.fill.fore_color.rgb = RGBColor(30, 41, 59) # Slate card
+        m_card.line.color.rgb = ACCENT_BLUE
+        m_card.line.width = Pt(1.5)
+
+        m_tf = m_card.text_frame
+        m_tf.word_wrap = True
+        m_tf.margin_left = Inches(0.2)
+        m_tf.margin_top = Inches(0.15)
+        m_tf.margin_right = Inches(0.2)
+
+        p_name = m_tf.paragraphs[0]
+        p_name.text = name
+        p_name.font.size = Pt(16)
+        p_name.font.bold = True
+        p_name.font.color.rgb = WHITE
+
+        p_id = m_tf.add_paragraph()
+        p_id.text = f"Student ID: {sid}"
+        p_id.font.size = Pt(12)
+        p_id.font.bold = True
+        p_id.font.color.rgb = RGBColor(56, 189, 248)
+        p_id.space_before = Pt(2)
+
+        p_role = m_tf.add_paragraph()
+        p_role.text = role
+        p_role.font.size = Pt(11)
+        p_role.font.color.rgb = RGBColor(203, 213, 225)
+        p_role.space_before = Pt(4)
+
+    add_notes(s1, "Comfort Penyengwe (Intro): 'Good morning Lecturer and colleagues. Today our group—Comfort Penyengwe, Lubuto Matambo, Lamla Mwanza, and Gideon Namuya—presents our project on Database Security under BIT3360. Databases hold an institution's most sensitive information. We will explain how databases are attacked, how we defend them, and show you a working prototype we built for the ZUT Student Information System.'")
 
     # =========================================================
-    # SLIDE 2: What is Database Security? (MEMBER 1)
+    # SLIDE 2: What is Database Security? (COMFORT PENYENGWE)
     # =========================================================
     s2 = prs.slides.add_slide(blank_layout)
-    add_header(s2, "Speaker 1: Foundations", "What is Database Security? (The CIA Triad Explained)", "Why database security is about protecting data from being seen, changed, or destroyed.")
+    add_header(s2, "Speaker 1: Comfort Penyengwe", "What is Database Security? (The CIA Triad Explained)", "Why database security is about protecting data from being seen, changed, or destroyed.")
     add_card(s2, Inches(0.8), Inches(1.8), Inches(3.6), Inches(4.7),
              "1. Confidentiality",
              "Only authorized eyes can see the data.",
@@ -182,13 +218,13 @@ def create_deck():
                  "Prevents malicious users from dropping tables or crashing the server.",
                  "Enforced using backups, read replicas, and privilege limits."
              ], border_color=ACCENT_BLUE)
-    add_notes(s2, "Member 1: 'To understand database security, we look at the CIA Triad: Confidentiality, Integrity, and Availability. Confidentiality means student NRCs stay private. Integrity means nobody can secretly change their grade from 50 to 90. Availability means the database is always online. Real security isn't just one firewall; it has to be built inside the database engine itself.'")
+    add_notes(s2, "Comfort Penyengwe: 'To understand database security, we look at the CIA Triad: Confidentiality, Integrity, and Availability. Confidentiality means student NRCs stay private. Integrity means nobody can secretly change their grade from 50 to 90. Availability means the database is always online. Real security isn't just one firewall; it has to be built inside the database engine itself.'")
 
     # =========================================================
-    # SLIDE 3: Common Threats (MEMBER 1)
+    # SLIDE 3: Common Threats (COMFORT PENYENGWE)
     # =========================================================
     s3 = prs.slides.add_slide(blank_layout)
-    add_header(s3, "Speaker 1: Threats", "How Databases Get Hacked (Common Threats)", "The two biggest dangers in database systems: SQL Injection and Privilege Abuse.")
+    add_header(s3, "Speaker 1: Comfort Penyengwe", "How Databases Get Hacked (Common Threats)", "The two biggest dangers in database systems: SQL Injection and Privilege Abuse.")
     add_card(s3, Inches(0.8), Inches(1.8), Inches(5.6), Inches(4.7),
              "1. SQL Injection (The #1 Web Attack)",
              "Trick the database into running the hacker's code.",
@@ -206,13 +242,13 @@ def create_deck():
                  "Missing Audit Trail: If someone alters a grade, but there is no audit log, nobody knows who did it.",
                  "Weak Passwords: Default root passwords or passwords stored in plaintext."
              ], border_color=RED)
-    add_notes(s3, "Member 1: 'The most famous database vulnerability is SQL Injection. If an application takes user text and glues it into a query, an attacker can input quotes and SQL keywords to trick the database into dumping all records. The second danger is giving regular users too much power—if a student can run an UPDATE command on the grades table, the integrity of the university is broken. Now, Member 2 will explain how we stop these attacks.'")
+    add_notes(s3, "Comfort Penyengwe: 'The most famous database vulnerability is SQL Injection. If an application takes user text and glues it into a query, an attacker can input quotes and SQL keywords to trick the database into dumping all records. The second danger is giving regular users too much power—if a student can run an UPDATE command on the grades table, the integrity of the university is broken. Now, Lubuto Matambo will explain how we stop these attacks.'")
 
     # =========================================================
-    # SLIDE 4: Access Control & Least Privilege (MEMBER 2)
+    # SLIDE 4: Access Control & Least Privilege (LUBUTO MATAMBO)
     # =========================================================
     s4 = prs.slides.add_slide(blank_layout)
-    add_header(s4, "Speaker 2: Core Defenses", "Role-Based Access Control & The Principle of Least Privilege", "Users should only be able to do what their specific job requires—nothing more.")
+    add_header(s4, "Speaker 2: Lubuto Matambo", "Role-Based Access Control & The Principle of Least Privilege", "Users should only be able to do what their specific job requires—nothing more.")
     add_card(s4, Inches(0.8), Inches(1.8), Inches(3.6), Inches(4.7),
              "Administrator (DBA)",
              "Full system control for maintenance.",
@@ -240,13 +276,13 @@ def create_deck():
                  "CANNOT view peer NRC numbers.",
                  "CANNOT update or alter any mark (Error 1142 Access Denied)."
              ], border_color=RED)
-    add_notes(s4, "Member 2: 'Thank you, Member 1. To defend against privilege abuse, we use Role-Based Access Control under the Principle of Least Privilege. In simple terms: an Admin can do everything; a Lecturer can only enter and update marks; and a Student can only view their own grades on a masked view. Even if a student tries to hack the system and run an UPDATE command, the database engine blocks it immediately with an Access Denied error.'")
+    add_notes(s4, "Lubuto Matambo: 'Thank you, Comfort. To defend against privilege abuse, we use Role-Based Access Control under the Principle of Least Privilege. In simple terms: an Admin can do everything; a Lecturer can only enter and update marks; and a Student can only view their own grades on a masked view. Even if a student tries to hack the system and run an UPDATE command, the database engine blocks it immediately with an Access Denied error.'")
 
     # =========================================================
-    # SLIDE 5: Parameterized Queries (MEMBER 2)
+    # SLIDE 5: Parameterized Queries (LUBUTO MATAMBO)
     # =========================================================
     s5 = prs.slides.add_slide(blank_layout)
-    add_header(s5, "Speaker 2: Query Defense", "How Parameterized Queries Stop SQL Injection Completely", "The golden rule of database security: Treat user input as data, never as executable code.")
+    add_header(s5, "Speaker 2: Lubuto Matambo", "How Parameterized Queries Stop SQL Injection Completely", "The golden rule of database security: Treat user input as data, never as executable code.")
     add_card(s5, Inches(0.8), Inches(1.8), Inches(5.6), Inches(4.7),
              "Vulnerable: String Concatenation",
              "The database gets tricked into running user text as commands.",
@@ -267,13 +303,13 @@ def create_deck():
                  "Why it works: The question mark ? is a placeholder. Input is strictly data literal.",
                  "Result: 0 records found. Attack 100% neutralized!"
              ], border_color=GREEN)
-    add_notes(s5, "Member 2: 'Now look at why Parameterized Queries are the ultimate defense against SQL Injection. In vulnerable code, you glue strings together, so the attacker's quotes become SQL commands. But in a Parameterized Query—or Prepared Statement—the database engine compiles the SQL blueprint first. When the attack payload arrives, the database treats it purely as plain text. It searches for an NRC containing quotes, finds nothing, and the attack fails completely.'")
+    add_notes(s5, "Lubuto Matambo: 'Now look at why Parameterized Queries are the ultimate defense against SQL Injection. In vulnerable code, you glue strings together, so the attacker's quotes become SQL commands. But in a Parameterized Query—or Prepared Statement—the database engine compiles the SQL blueprint first. When the attack payload arrives, the database treats it purely as plain text. It searches for an NRC containing quotes, finds nothing, and the attack fails completely.'")
 
     # =========================================================
-    # SLIDE 6: Encryption & Audit Logging (MEMBER 2)
+    # SLIDE 6: Encryption & Audit Logging (LUBUTO MATAMBO)
     # =========================================================
     s6 = prs.slides.add_slide(blank_layout)
-    add_header(s6, "Speaker 2: Accountability", "Data Encryption & Tamper-Evident Audit Logging", "How we protect data on disk and catch anyone who tries to alter marks.")
+    add_header(s6, "Speaker 2: Lubuto Matambo", "Data Encryption & Tamper-Evident Audit Logging", "How we protect data on disk and catch anyone who tries to alter marks.")
     add_card(s6, Inches(0.8), Inches(1.8), Inches(5.6), Inches(4.7),
              "1. Cryptographic Protection (Hashing & Encryption)",
              "If the database is stolen, the data cannot be read.",
@@ -291,13 +327,13 @@ def create_deck():
                  "Every time an UPDATE occurs, the trigger silently records: Who made the change, the exact timestamp, the old mark, and the new mark.",
                  "Guarantees Non-Repudiation: No one can deny what they did."
              ], border_color=GREEN)
-    add_notes(s6, "Member 2: 'Our third layer of defense is Encryption and Auditing. We hash passwords so they cannot be reversed, and encrypt network connections. And to stop insider fraud, we created an automatic database trigger on the grades table. If a lecturer changes a grade, the database automatically logs who did it, the old score, and the new score. Now, Member 3 will explain the industry tools and our prototype architecture.'")
+    add_notes(s6, "Lubuto Matambo: 'Our third layer of defense is Encryption and Auditing. We hash passwords so they cannot be reversed, and encrypt network connections. And to stop insider fraud, we created an automatic database trigger on the grades table. If a lecturer changes a grade, the database automatically logs who did it, the old score, and the new score. Now, Lamla Mwanza will explain the industry tools and our prototype architecture.'")
 
     # =========================================================
-    # SLIDE 7: Industry Tools & Systems (MEMBER 3)
+    # SLIDE 7: Industry Tools & Systems (LAMLA MWANZA)
     # =========================================================
     s7 = prs.slides.add_slide(blank_layout)
-    add_header(s7, "Speaker 3: Industry Solutions", "Enterprise Database Security Systems & Tools", "How major enterprises and tech companies implement these controls in production.")
+    add_header(s7, "Speaker 3: Lamla Mwanza", "Enterprise Database Security Systems & Tools", "How major enterprises and tech companies implement these controls in production.")
     add_card(s7, Inches(0.8), Inches(1.8), Inches(3.6), Inches(4.7),
              "MySQL Enterprise Security",
              "Commercial features built into MySQL.",
@@ -321,13 +357,13 @@ def create_deck():
                  "HashiCorp Vault: Generates temporary database passwords that expire automatically (no hardcoded passwords).",
                  "IBM Guardium / Imperva: Monitors all database traffic and raises alerts if unusual queries occur."
              ])
-    add_notes(s7, "Member 3: 'Thank you, Member 2. In large corporations, database security is powered by enterprise tools. MySQL Enterprise provides an automated Firewall that stops SQL injection, and Transparent Data Encryption to protect disks. PostgreSQL has Row-Level Security so users only see their own rows. And tools like HashiCorp Vault automatically rotate passwords so developers never have to write hardcoded credentials in code.'")
+    add_notes(s7, "Lamla Mwanza: 'Thank you, Lubuto. In large corporations, database security is powered by enterprise tools. MySQL Enterprise provides an automated Firewall that stops SQL injection, and Transparent Data Encryption to protect disks. PostgreSQL has Row-Level Security so users only see their own rows. And tools like HashiCorp Vault automatically rotate passwords so developers never have to write hardcoded credentials in code.'")
 
     # =========================================================
-    # SLIDE 8: Benefits & Real-World Challenges (MEMBER 3)
+    # SLIDE 8: Benefits & Real-World Challenges (LAMLA MWANZA)
     # =========================================================
     s8 = prs.slides.add_slide(blank_layout)
-    add_header(s8, "Speaker 3: Evaluation & Law", "Benefits, Trade-offs & The Zambia Data Protection Act", "Balancing high security with system speed, usability, and legal requirements.")
+    add_header(s8, "Speaker 3: Lamla Mwanza", "Benefits, Trade-offs & The Zambia Data Protection Act", "Balancing high security with system speed, usability, and legal requirements.")
     add_card(s8, Inches(0.8), Inches(1.8), Inches(5.6), Inches(4.7),
              "Key Benefits & Legal Compliance",
              "Keeping the university reputable and compliant with law.",
@@ -344,13 +380,13 @@ def create_deck():
                  "Management Complexity: Maintaining different user roles and permissions takes time as the university grows.",
                  "The Human Factor: Technology cannot stop people from writing passwords on sticky notes or falling for phishing."
              ], border_color=AMBER)
-    add_notes(s8, "Member 3: 'Security delivers massive benefits. In Zambia, under the Data Protection Act of 2021, any institution holding citizen records like NRC numbers is legally mandated to protect them. But security comes with trade-offs: encrypting columns and running audit triggers uses more server CPU, and permissions must be managed carefully. Plus, security software cannot fix human mistakes like sharing passwords.'")
+    add_notes(s8, "Lamla Mwanza: 'Security delivers massive benefits. In Zambia, under the Data Protection Act of 2021, any institution holding citizen records like NRC numbers is legally mandated to protect them. But security comes with trade-offs: encrypting columns and running audit triggers uses more server CPU, and permissions must be managed carefully. Plus, security software cannot fix human mistakes like sharing passwords.'")
 
     # =========================================================
-    # SLIDE 9: Our Prototype Architecture (MEMBER 3)
+    # SLIDE 9: Our Prototype Architecture (LAMLA MWANZA)
     # =========================================================
     s9 = prs.slides.add_slide(blank_layout)
-    add_header(s9, "Speaker 3: System Design", "Our Prototype Design: ZUT Student Records System", "How our database tables, roles, and security measures fit together.")
+    add_header(s9, "Speaker 3: Lamla Mwanza", "Our Prototype Design: ZUT Student Records System", "How our database tables, roles, and security measures fit together.")
     add_card(s9, Inches(0.8), Inches(1.8), Inches(5.6), Inches(4.7),
              "Database Schema & Tables",
              "Models real academic university entities.",
@@ -367,15 +403,15 @@ def create_deck():
                  "1. RBAC Matrix: sec_admin (Full), sec_lecturer (Grades only), sec_student (Sanitized view, NRC masked).",
                  "2. Parameterized Query Engine: Protects the student search box against SQL injection attacks.",
                  "3. Automated Audit Trigger: Automatically records grade changes into audit_log for non-repudiation.",
-                 "Now, Member 4 will walk you through the live demonstration of this system."
+                 "Now, Gideon Namuya will walk you through the live demonstration of this system."
              ], border_color=GREEN)
-    add_notes(s9, "Member 3: 'For our practical assignment, we built the ZUT Student Records System (zut_student_records). Our database models students with their NRCs, courses, grades, and an automated audit log. We created 3 distinct user roles with exact GRANT permissions and built an interactive web portal to demonstrate the security controls in real time. I will now hand over to Member 4 for the live demonstration.'")
+    add_notes(s9, "Lamla Mwanza: 'For our practical assignment, we built the ZUT Student Records System (zut_student_records). Our database models students with their NRCs, courses, grades, and an automated audit log. We created 3 distinct user roles with exact GRANT permissions and built an interactive web portal to demonstrate the security controls in real time. I will now hand over to Gideon Namuya for the live demonstration.'")
 
     # =========================================================
-    # SLIDE 10: Live Demo - Access Control (MEMBER 4)
+    # SLIDE 10: Live Demo - Access Control (GIDEON NAMUYA)
     # =========================================================
     s10 = prs.slides.add_slide(blank_layout)
-    add_header(s10, "Speaker 4: Live Demo", "Live Demonstration: Role-Based Access Control in Action", "Testing what each user can and cannot do live in our prototype.")
+    add_header(s10, "Speaker 4: Gideon Namuya", "Live Demonstration: Role-Based Access Control in Action", "Testing what each user can and cannot do live in our prototype.")
     add_card(s10, Inches(0.8), Inches(1.8), Inches(3.6), Inches(4.7),
              "Test 1: Administrator",
              "Has full DBA privileges.",
@@ -403,13 +439,13 @@ def create_deck():
                  "Action: Alter grade mark.",
                  "Result: [ACCESS DENIED Error 1142] Blocked immediately."
              ], border_color=RED)
-    add_notes(s10, "Member 4: 'Thank you, Member 3. Now let us look at our live demonstration. On screen in our web portal, when logged in as a Lecturer and we update a student mark, it succeeds because lecturers have UPDATE permissions. But if the lecturer tries to DROP the table or delete records, the database engine returns Error 1142: Access Denied. Similarly, when logged in as a student, any attempt to change a grade or view peer NRC numbers is rejected immediately.'")
+    add_notes(s10, "Gideon Namuya: 'Thank you, Lamla. Now let us look at our live demonstration. On screen in our web portal, when logged in as a Lecturer and we update a student mark, it succeeds because lecturers have UPDATE permissions. But if the lecturer tries to DROP the table or delete records, the database engine returns Error 1142: Access Denied. Similarly, when logged in as a student, any attempt to change a grade or view peer NRC numbers is rejected immediately.'")
 
     # =========================================================
-    # SLIDE 11: Live Demo - SQLi & Audit (MEMBER 4)
+    # SLIDE 11: Live Demo - SQLi & Audit (GIDEON NAMUYA)
     # =========================================================
     s11 = prs.slides.add_slide(blank_layout)
-    add_header(s11, "Speaker 4: Live Demo", "Live Demonstration: SQL Injection Attack vs Defense & Audit Log", "Proving how prepared statements neutralize attacks and triggers record changes.")
+    add_header(s11, "Speaker 4: Gideon Namuya", "Live Demonstration: SQL Injection Attack vs Defense & Audit Log", "Proving how prepared statements neutralize attacks and triggers record changes.")
     add_card(s11, Inches(0.8), Inches(1.8), Inches(5.6), Inches(4.7),
              "SQL Injection Attack vs Defense",
              "Testing payload: ' OR '1'='1 in the NRC search box.",
@@ -425,13 +461,13 @@ def create_deck():
                  "Querying audit_log shows: Log ID #2 | UPDATE | Changed By: sec_lecturer | Old Mark: 78.50 | New Mark: 95.00 | Exact Timestamp.",
                  "Provides 100% accountability and non-repudiation."
              ], border_color=GREEN)
-    add_notes(s11, "Member 4: 'Next, we test our additional security measures. In our search box, we test the injection payload: single quote OR 1 equals 1. In the vulnerable query, this dumps all student NRCs. But in our Parameterized Query, the database treats it as literal text, and zero records are leaked. Finally, we look at the audit log: the database trigger captured the exact timestamp, the user ID, the old score, and the new score.'")
+    add_notes(s11, "Gideon Namuya: 'Next, we test our additional security measures. In our search box, we test the injection payload: single quote OR 1 equals 1. In the vulnerable query, this dumps all student NRCs. But in our Parameterized Query, the database treats it as literal text, and zero records are leaked. Finally, we look at the audit log: the database trigger captured the exact timestamp, the user ID, the old score, and the new score.'")
 
     # =========================================================
-    # SLIDE 12: Challenges, Conclusion & References (MEMBER 4)
+    # SLIDE 12: Challenges, Conclusion & References (GIDEON NAMUYA)
     # =========================================================
     s12 = prs.slides.add_slide(blank_layout)
-    add_header(s12, "Speaker 4: Conclusion", "Challenges Encountered, Conclusion & References", "What we learned building this prototype and the academic sources we consulted.")
+    add_header(s12, "Speaker 4: Gideon Namuya", "Challenges Encountered, Conclusion & References", "What we learned building this prototype and the academic sources we consulted.")
     add_card(s12, Inches(0.8), Inches(1.8), Inches(5.6), Inches(4.7),
              "Challenges & How We Solved Them",
              "Practical lessons learned during development.",
@@ -451,11 +487,11 @@ def create_deck():
                  "3. Government of Zambia. The Data Protection Act, No. 3 of 2021.",
                  "4. Oracle. MySQL 8.0 Reference Manual: Security & Access Management."
              ], border_color=GREEN)
-    add_notes(s12, "Member 4: 'In conclusion, database security cannot be an afterthought. By combining Role-Based Access Control, Parameterized Queries, and automated triggers, we achieved confidentiality, integrity, and compliance with Zambian law. This concludes our presentation. Our group of 4 is now ready to answer any questions from the panel.'")
+    add_notes(s12, "Gideon Namuya: 'In conclusion, database security cannot be an afterthought. By combining Role-Based Access Control, Parameterized Queries, and automated triggers, we achieved confidentiality, integrity, and compliance with Zambian law. This concludes our presentation. Comfort, Lubuto, Lamla, and I are now ready to answer any questions from the panel. Thank you!'")
 
     output_filename = "BIT3360_Database_Security_Presentation.pptx"
     prs.save(output_filename)
-    print(f"[+] Successfully generated simplified, explanatory PPTX: {output_filename}")
+    print(f"[+] Successfully generated official PPTX with student names: {output_filename}")
 
 if __name__ == "__main__":
     create_deck()
