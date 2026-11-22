@@ -6,59 +6,58 @@
     <title>BIT3360 - Database Security Presentation | ZUT</title>
     <style>
         :root {
-            --navy-dark: #0f172a;
-            --accent: #2563eb;
+            --dark-bg: #0f172a;
+            --card-bg: #1e293b;
+            --border-muted: #334155;
             --accent-cyan: #38bdf8;
-            --bg-canvas: #f1f5f9;
-            --card-white: #ffffff;
-            --border-slate: #cbd5e1;
-            --text-dark: #1e293b;
-            --text-muted: #64748b;
+            --accent-blue: #60a5fa;
+            --accent-green: #34d399;
+            --accent-red: #f87171;
+            --accent-amber: #fbbf24;
+            --accent-purple: #a78bfa;
+            --text-white: #f8fafc;
             --text-silver: #cbd5e1;
-            --danger: #dc2626;
-            --success: #16a34a;
-            --warning: #d97706;
+            --text-muted: #94a3b8;
+            --footer-muted: #64748b;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
-        body { background-color: #0b1120; color: var(--text-dark); display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+        body { background-color: #060913; color: var(--text-silver); display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
 
         header.navbar {
-            width: 100%; max-width: 1100px; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; color: #f8fafc;
+            width: 100%; max-width: 1100px; padding: 18px 24px; display: flex; justify-content: space-between; align-items: center; color: var(--text-white);
         }
 
         .badge {
-            background: rgba(37, 99, 235, 0.25); color: var(--accent-cyan); border: 1px solid rgba(56, 189, 248, 0.4); padding: 4px 14px; border-radius: 9999px; font-size: 0.85rem; font-weight: 700;
+            background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan); border: 1px solid rgba(56, 189, 248, 0.4); padding: 4px 14px; border-radius: 9999px; font-size: 0.85rem; font-weight: 700;
         }
 
         .deck-container { width: 100%; max-width: 1050px; margin: 10px auto 30px; }
 
         .slide {
-            display: none; background: var(--bg-canvas); border-radius: 16px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5); overflow: hidden; min-height: 580px; animation: fadeIn 0.3s ease-in-out; border: 1px solid rgba(255, 255, 255, 0.1);
+            display: none; background: var(--dark-bg); border-radius: 16px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8); overflow: hidden; min-height: 590px; animation: fadeIn 0.3s ease-in-out; border: 1px solid var(--border-muted);
         }
 
         .slide.active { display: flex; flex-direction: column; justify-content: space-between; }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Top Header Band on Every Slide */
-        .slide-header-band {
-            background: var(--navy-dark);
-            border-bottom: 4px solid var(--accent);
-            padding: 22px 36px;
-            color: white;
+        /* Top Header inside slide */
+        .slide-header {
+            padding: 24px 36px 16px;
+            border-bottom: 1px solid var(--border-muted);
         }
 
-        .slide-header-band .topic-tag {
-            font-size: 0.82rem; color: var(--accent-cyan); font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+        .slide-header .topic-tag {
+            font-size: 0.82rem; color: var(--accent-cyan); font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
         }
 
-        .slide-header-band h2 {
-            font-size: 1.65rem; color: #ffffff; font-weight: 700; margin-top: 3px;
+        .slide-header h2 {
+            font-size: 1.65rem; color: var(--text-white); font-weight: 700; margin-top: 4px;
         }
 
-        .slide-header-band p.subtitle {
-            font-size: 0.92rem; color: var(--text-silver); margin-top: 2px;
+        .slide-header p.subtitle {
+            font-size: 0.95rem; color: var(--text-muted); margin-top: 3px;
         }
 
         .content-body { padding: 24px 36px; flex-grow: 1; }
@@ -66,73 +65,90 @@
         .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
 
         .card {
-            background: var(--card-white);
-            border: 1.5px solid var(--border-slate);
+            background: var(--card-bg);
+            border: 1.5px solid var(--border-muted);
             border-radius: 12px;
             padding: 20px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
         }
 
-        .card.highlight { border-color: var(--accent); }
-        .card.danger { border-color: var(--danger); }
-        .card.success { border-color: var(--success); }
-        .card.amber { border-color: var(--warning); }
+        .card.blue { border-color: var(--accent-blue); }
+        .card.green { border-color: var(--accent-green); }
+        .card.red { border-color: var(--accent-red); }
+        .card.amber { border-color: var(--accent-amber); }
+        .card.purple { border-color: var(--accent-purple); }
 
-        .card h3 { font-size: 1.15rem; margin-bottom: 6px; color: var(--navy-dark); font-weight: 700; }
-        .card .in-simple-terms { font-size: 0.92rem; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
-        .card.danger .in-simple-terms { color: var(--danger); }
-        .card.success .in-simple-terms { color: var(--success); }
-        .card.amber .in-simple-terms { color: var(--warning); }
+        .card h3 { font-size: 1.15rem; margin-bottom: 8px; font-weight: 700; color: var(--accent-cyan); }
+        .card.blue h3 { color: var(--accent-blue); }
+        .card.green h3 { color: var(--accent-green); }
+        .card.red h3 { color: var(--accent-red); }
+        .card.amber h3 { color: var(--accent-amber); }
+        .card.purple h3 { color: var(--accent-purple); }
+
+        .card .concept-tag { font-size: 0.9rem; font-weight: 700; color: var(--text-white); margin-bottom: 10px; background: rgba(255,255,255,0.04); padding: 4px 8px; border-radius: 6px; border-left: 3px solid var(--accent-cyan); }
+        .card.blue .concept-tag { border-left-color: var(--accent-blue); }
+        .card.green .concept-tag { border-left-color: var(--accent-green); }
+        .card.red .concept-tag { border-left-color: var(--accent-red); }
+        .card.amber .concept-tag { border-left-color: var(--accent-amber); }
 
         ul { margin-left: 18px; margin-top: 6px; }
-        li { margin-bottom: 6px; font-size: 0.92rem; line-height: 1.5; color: var(--text-dark); }
+        li { margin-bottom: 7px; font-size: 0.92rem; line-height: 1.5; color: var(--text-silver); }
+        li strong { color: var(--text-white); }
+        code { background: #0b0f19; color: var(--accent-cyan); padding: 2px 6px; border-radius: 4px; font-family: Consolas, monospace; font-size: 0.85em; border: 1px solid var(--border-muted); }
 
         .slide-footer-bar {
-            background: #e2e8f0;
+            background: #090e1a;
+            border-top: 1px solid var(--border-muted);
             padding: 10px 36px;
             display: flex;
             justify-content: space-between;
-            font-size: 0.85rem;
-            color: var(--text-muted);
+            font-size: 0.82rem;
+            color: var(--footer-muted);
             font-weight: 600;
+        }
+
+        .slide-footer-bar .slide-num {
+            color: var(--accent-cyan);
         }
 
         .speaker-notes-box {
             margin: 0 36px 18px;
-            background: #fffbeb;
-            border: 1px solid #fef3c7;
-            border-left: 4px solid #f59e0b;
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid var(--border-muted);
+            border-left: 4px solid var(--accent-cyan);
             padding: 12px 16px;
             border-radius: 8px;
             font-size: 0.9rem;
-            color: #78350f;
+            color: var(--text-silver);
         }
+        .speaker-notes-box strong { color: var(--accent-cyan); }
 
         .controls-bar {
-            width: 100%; max-width: 1050px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; color: #94a3b8; font-size: 0.95rem;
+            width: 100%; max-width: 1050px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; color: var(--text-muted); font-size: 0.95rem;
         }
 
         .btn-group { display: flex; gap: 12px; }
         button.nav-btn {
-            background: #1e293b; color: #f8fafc; border: 1px solid #334155; padding: 10px 20px; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+            background: var(--card-bg); color: var(--text-white); border: 1px solid var(--border-muted); padding: 10px 20px; border-radius: 8px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
         }
-        button.nav-btn:hover { background: var(--accent); border-color: var(--accent); }
+        button.nav-btn:hover { background: #2563eb; border-color: #2563eb; }
         button.nav-btn:disabled { opacity: 0.4; cursor: not-allowed; }
 
         /* Slide 1 Hero */
         .slide-title-hero {
-            background: var(--navy-dark);
+            background: var(--dark-bg);
             color: white;
             padding: 40px 48px;
-            min-height: 580px;
+            min-height: 590px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            border-left: 6px solid var(--accent-cyan);
         }
 
-        .hero-badge { background: rgba(37, 99, 235, 0.3); color: var(--accent-cyan); padding: 6px 16px; border-radius: 30px; font-weight: 700; font-size: 0.88rem; width: fit-content; margin-bottom: 12px; border: 1px solid rgba(56, 189, 248, 0.4); }
-        .slide-title-hero h1 { font-size: 2.5rem; color: #ffffff; line-height: 1.2; margin-bottom: 8px; }
-        .slide-title-hero p.subtitle { font-size: 1.15rem; color: var(--text-silver); margin-bottom: 24px; }
+        .hero-badge { background: rgba(56, 189, 248, 0.15); color: var(--accent-cyan); padding: 6px 16px; border-radius: 30px; font-weight: 700; font-size: 0.88rem; width: fit-content; margin-bottom: 12px; border: 1px solid rgba(56, 189, 248, 0.4); }
+        .slide-title-hero h1 { font-size: 2.5rem; color: var(--text-white); line-height: 1.2; margin-bottom: 8px; font-weight: 800; }
+        .slide-title-hero p.subtitle { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 24px; }
 
         .members-grid {
             display: grid;
@@ -142,14 +158,22 @@
         }
 
         .member-card {
-            background: #1e293b;
-            border: 1.5px solid var(--accent);
+            background: var(--card-bg);
+            border: 1.5px solid var(--accent-cyan);
             border-radius: 10px;
             padding: 16px 20px;
         }
+        .member-card.c-blue { border-color: var(--accent-blue); }
+        .member-card.c-green { border-color: var(--accent-green); }
+        .member-card.c-amber { border-color: var(--accent-amber); }
+        .member-card.c-purple { border-color: var(--accent-purple); }
 
-        .member-card h4 { font-size: 1.15rem; color: white; margin-bottom: 4px; }
-        .member-card p { font-size: 0.92rem; color: var(--accent-cyan); font-weight: 700; }
+        .member-card h4 { font-size: 1.15rem; color: var(--text-white); margin-bottom: 4px; font-weight: 700; }
+        .member-card p { font-size: 0.92rem; font-weight: 700; }
+        .member-card.c-blue p { color: var(--accent-blue); }
+        .member-card.c-green p { color: var(--accent-green); }
+        .member-card.c-amber p { color: var(--accent-amber); }
+        .member-card.c-purple p { color: var(--accent-purple); }
     </style>
 </head>
 <body>
@@ -169,7 +193,7 @@
             <div class="slide-title-hero">
                 <div>
                     <div class="hero-badge">ZAMBIA UNIVERSITY COLLEGE OF TECHNOLOGY (ZUT)</div>
-                    <p style="color: #94a3b8; font-size: 0.95rem; font-weight: 600;">BIT3360: Advanced Databases — Group Assignment</p>
+                    <p style="color: var(--text-muted); font-size: 0.95rem; font-weight: 600;">BIT3360: Advanced Databases — Group Assignment</p>
                     <h1>Database Security & Practical Protection Prototype</h1>
                     <p class="subtitle">Role-Based Access Control, SQL Injection Defense & Tamper-Evident Audit Logging</p>
                 </div>
@@ -177,19 +201,19 @@
                 <div>
                     <p style="color: var(--text-silver); font-size: 0.9rem; font-weight: 700; margin-bottom: 8px; text-transform: uppercase;">Group Members:</p>
                     <div class="members-grid">
-                        <div class="member-card">
+                        <div class="member-card c-blue">
                             <h4>Comfort Penyengwe</h4>
                             <p>Student ID: 2410098</p>
                         </div>
-                        <div class="member-card">
+                        <div class="member-card c-green">
                             <h4>Gideon Namuya</h4>
                             <p>Student ID: 2410149</p>
                         </div>
-                        <div class="member-card">
+                        <div class="member-card c-amber">
                             <h4>Lubuto Matambo</h4>
                             <p>Student ID: 2410171</p>
                         </div>
-                        <div class="member-card">
+                        <div class="member-card c-purple">
                             <h4>Lamla Mwanza</h4>
                             <p>Student ID: 2410205</p>
                         </div>
@@ -204,38 +228,38 @@
 
         <!-- SLIDE 2: Core Concepts -->
         <section class="slide">
-            <div class="slide-header-band">
+            <div class="slide-header">
                 <div class="topic-tag">Part 1: Foundations</div>
                 <h2>What is Database Security? (The CIA Triad Explained)</h2>
                 <p class="subtitle">Why database security is about protecting data from being seen, changed, or destroyed.</p>
             </div>
             <div class="content-body">
                 <div class="grid-3">
-                    <div class="card highlight">
+                    <div class="card blue">
                         <h3>1. Confidentiality</h3>
-                        <div class="in-simple-terms">💡 Only authorized eyes can see the data.</div>
+                        <div class="concept-tag">💡 Only authorized eyes can see the data.</div>
                         <ul>
-                            <li>Protects confidential identity data like student <strong>NRC numbers</strong> and emails.</li>
-                            <li>Prevents data leaks to unauthorized students or external hackers.</li>
-                            <li>Enforced via user permissions and masked views (<code>vw_student_grades</code>).</li>
+                            <li><strong>Student Privacy:</strong> Protects confidential identity data like student <strong>NRC numbers</strong> and emails.</li>
+                            <li><strong>Access Restriction:</strong> Prevents confidential data leaks to unauthorized students or external hackers.</li>
+                            <li><strong>Enforcement:</strong> Achieved through user permissions and masked views (<code>vw_student_grades</code>).</li>
                         </ul>
                     </div>
-                    <div class="card success">
+                    <div class="card green">
                         <h3>2. Integrity</h3>
-                        <div class="in-simple-terms">💡 Data cannot be secretly altered or faked.</div>
+                        <div class="concept-tag">💡 Data cannot be secretly altered or faked.</div>
                         <ul>
-                            <li>Ensures exam marks and academic standings remain 100% genuine.</li>
-                            <li>Stops rogue actors from tampering with grades or student records.</li>
-                            <li>Enforced using triggers, constraints, and audit logging.</li>
+                            <li><strong>Exam Authenticity:</strong> Ensures marks and transcripts remain 100% genuine and unaltered.</li>
+                            <li><strong>Fraud Prevention:</strong> Stops rogue actors or unauthorized students from tampering with grades.</li>
+                            <li><strong>Enforcement:</strong> Implemented using database triggers, constraints, and audit logging.</li>
                         </ul>
                     </div>
                     <div class="card amber">
                         <h3>3. Availability</h3>
-                        <div class="in-simple-terms">💡 The database is up when you need it.</div>
+                        <div class="concept-tag">💡 The database is up when you need it.</div>
                         <ul>
-                            <li>Ensures lecturers and students have timely, reliable access during exams.</li>
-                            <li>Guards against accidental deletion of tables or Denial-of-Service crashes.</li>
-                            <li>Enforced using backups, clustering, and privilege limits.</li>
+                            <li><strong>Service Uptime:</strong> Ensures lecturers and students have reliable, timely access during exams.</li>
+                            <li><strong>Resilience:</strong> Prevents accidental dropping of tables or Denial-of-Service crashes.</li>
+                            <li><strong>Enforcement:</strong> Handled via automated backups, clustering, and privilege limits.</li>
                         </ul>
                     </div>
                 </div>
@@ -246,36 +270,36 @@
             </div>
             <div class="slide-footer-bar">
                 <span>ZAMBIA UNIVERSITY COLLEGE OF TECHNOLOGY  •  BIT3360</span>
-                <span>Slide 2 of 12</span>
+                <span class="slide-num">Slide 2 of 12</span>
             </div>
         </section>
 
         <!-- SLIDE 3: Common Threats -->
         <section class="slide">
-            <div class="slide-header-band">
+            <div class="slide-header">
                 <div class="topic-tag">Part 1: Threat Landscape</div>
                 <h2>How Databases Get Hacked (Common Threats)</h2>
                 <p class="subtitle">The two biggest dangers in database systems: SQL Injection and Privilege Abuse.</p>
             </div>
             <div class="content-body">
                 <div class="grid-2">
-                    <div class="card danger">
+                    <div class="card red">
                         <h3>1. SQL Injection (The #1 Web Attack)</h3>
-                        <div class="in-simple-terms">💡 Tricking the database into running the hacker's code.</div>
+                        <div class="concept-tag">💡 Tricking the database into running the hacker's code.</div>
                         <ul>
-                            <li>Occurs when an application glues user text directly into an SQL query string.</li>
-                            <li>Attacker types into an NRC search box: <code>' OR '1'='1</code></li>
-                            <li>The database evaluates <code>'1'='1'</code> as TRUE for every single row.</li>
-                            <li><strong>Result:</strong> Critical data breach! The entire student registry, NRCs, and emails are dumped onto the screen.</li>
+                            <li><strong>Vulnerability:</strong> Happens when an application glues user input directly into an SQL query string.</li>
+                            <li><strong>Payload:</strong> Attacker types into an NRC search box: <code>' OR '1'='1</code></li>
+                            <li><strong>Execution:</strong> The database evaluates <code>'1'='1'</code> as TRUE for every single row in the database.</li>
+                            <li><strong>Result:</strong> Critical data breach! The entire student registry, NRCs, and emails are dumped on screen.</li>
                         </ul>
                     </div>
-                    <div class="card danger">
+                    <div class="card red">
                         <h3>2. Privilege Abuse & Insider Threats</h3>
-                        <div class="in-simple-terms">💡 Giving regular users too much database power.</div>
+                        <div class="concept-tag">💡 Giving regular users too much database power.</div>
                         <ul>
-                            <li>If a regular account has <code>DROP</code> or <code>DELETE</code> rights, one rogue action destroys the entire database.</li>
-                            <li><strong>Missing Audit Trail:</strong> If someone alters a grade, but there is no audit log, nobody knows who did it.</li>
-                            <li><strong>Weak Authentication:</strong> Default root passwords or passwords stored in plaintext.</li>
+                            <li><strong>Over-Privileged Accounts:</strong> If a regular account has <code>DROP</code> or <code>DELETE</code> rights, one rogue action destroys the entire database.</li>
+                            <li><strong>Missing Audit Trail:</strong> If someone alters a grade with no audit log, nobody knows who did it.</li>
+                            <li><strong>Weak Authentication:</strong> Default root passwords or credentials saved in plaintext source code.</li>
                         </ul>
                     </div>
                 </div>
@@ -286,46 +310,46 @@
             </div>
             <div class="slide-footer-bar">
                 <span>ZAMBIA UNIVERSITY COLLEGE OF TECHNOLOGY  •  BIT3360</span>
-                <span>Slide 3 of 12</span>
+                <span class="slide-num">Slide 3 of 12</span>
             </div>
         </section>
 
         <!-- SLIDE 4: Access Control (GIDEON) -->
         <section class="slide">
-            <div class="slide-header-band">
+            <div class="slide-header">
                 <div class="topic-tag">Part 2: Defensive Controls</div>
                 <h2>Role-Based Access Control & The Principle of Least Privilege</h2>
                 <p class="subtitle">Users should only be allowed to do what their specific job requires—nothing more.</p>
             </div>
             <div class="content-body">
                 <div class="grid-3">
-                    <div class="card highlight">
+                    <div class="card blue">
                         <h3>Administrator (DBA)</h3>
-                        <div class="in-simple-terms">💡 Full system control for maintenance.</div>
+                        <div class="concept-tag">💡 Full system control for maintenance.</div>
                         <ul>
-                            <li>Account: <code>sec_admin</code></li>
-                            <li>Permissions: <code>GRANT ALL PRIVILEGES</code></li>
+                            <li><strong>Account:</strong> <code>sec_admin</code></li>
+                            <li><strong>Permissions:</strong> <code>GRANT ALL PRIVILEGES</code></li>
                             <li>Can create tables, manage backups, and configure user accounts.</li>
-                            <li>Restricted strictly to authorized IT staff.</li>
+                            <li>Restricted strictly to authorized IT database administrators.</li>
                         </ul>
                     </div>
                     <div class="card amber">
                         <h3>Lecturer (Academic Staff)</h3>
-                        <div class="in-simple-terms">💡 Can grade students, but cannot destroy data.</div>
+                        <div class="concept-tag">💡 Can grade students, but cannot destroy data.</div>
                         <ul>
-                            <li>Account: <code>sec_lecturer</code></li>
-                            <li>Permissions: <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code> on grades.</li>
+                            <li><strong>Account:</strong> <code>sec_lecturer</code></li>
+                            <li><strong>Permissions:</strong> <code>SELECT</code>, <code>INSERT</code>, <code>UPDATE</code> on grades.</li>
                             <li><strong>CANNOT</strong> drop tables (<code>DROP</code> denied).</li>
                             <li><strong>CANNOT</strong> delete student accounts (<code>DELETE</code> denied).</li>
                         </ul>
                     </div>
-                    <div class="card danger">
+                    <div class="card red">
                         <h3>Student (Undergraduate)</h3>
-                        <div class="in-simple-terms">💡 Strict read-only access to their own grades.</div>
+                        <div class="concept-tag">💡 Strict read-only access to their own grades.</div>
                         <ul>
-                            <li>Account: <code>sec_student</code></li>
-                            <li>Permissions: <code>SELECT</code> on masked view only.</li>
-                            <li><strong>CANNOT</strong> view peer NRC numbers.</li>
+                            <li><strong>Account:</strong> <code>sec_student</code></li>
+                            <li><strong>Permissions:</strong> <code>SELECT</code> on masked view only.</li>
+                            <li><strong>CANNOT</strong> view peer NRC numbers or student emails.</li>
                             <li><strong>CANNOT</strong> update or alter any mark (Error 1142 Access Denied).</li>
                         </ul>
                     </div>
@@ -337,37 +361,37 @@
             </div>
             <div class="slide-footer-bar">
                 <span>ZAMBIA UNIVERSITY COLLEGE OF TECHNOLOGY  •  BIT3360</span>
-                <span>Slide 4 of 12</span>
+                <span class="slide-num">Slide 4 of 12</span>
             </div>
         </section>
 
         <!-- SLIDE 5: Parameterized Queries (GIDEON) -->
         <section class="slide">
-            <div class="slide-header-band">
+            <div class="slide-header">
                 <div class="topic-tag">Part 2: Defensive Controls</div>
                 <h2>How Parameterized Queries Stop SQL Injection Completely</h2>
                 <p class="subtitle">The golden rule: Treat user input strictly as plain data, never as executable SQL instructions.</p>
             </div>
             <div class="content-body">
                 <div class="grid-2">
-                    <div class="card danger">
+                    <div class="card red">
                         <h3>Vulnerable: Dynamic String Concatenation</h3>
-                        <div class="in-simple-terms">💡 The database gets tricked into running user text as commands.</div>
+                        <div class="concept-tag">💡 The database gets tricked into running user text as commands.</div>
                         <ul>
                             <li><code>SELECT * FROM students WHERE nrc = 'INPUT'</code></li>
-                            <li>User types: <code>' OR '1'='1</code></li>
-                            <li>What runs: <code>WHERE nrc = '' OR '1'='1'</code></li>
+                            <li><strong>Attacker Types:</strong> <code>' OR '1'='1</code></li>
+                            <li><strong>Compiled Logic:</strong> <code>WHERE nrc = '' OR '1'='1'</code></li>
                             <li><strong>Why it breaks:</strong> Quotes close the string; <code>OR '1'='1'</code> becomes live SQL logic!</li>
                             <li><strong>Result:</strong> Every confidential student record and NRC is leaked.</li>
                         </ul>
                     </div>
-                    <div class="card success">
+                    <div class="card green">
                         <h3>Secure: Parameterized Prepared Statement</h3>
-                        <div class="in-simple-terms">💡 Database compiles query FIRST, before input arrives.</div>
+                        <div class="concept-tag">💡 Database compiles query FIRST, before input arrives.</div>
                         <ul>
                             <li><code>cursor.execute("SELECT * FROM students WHERE nrc = ?", (input,))</code></li>
-                            <li>User types: <code>' OR '1'='1</code></li>
-                            <li>What runs: Searches literally for a student whose exact NRC text contains quotes and OR.</li>
+                            <li><strong>Attacker Types:</strong> <code>' OR '1'='1</code></li>
+                            <li><strong>Safe Execution:</strong> Searches literally for a student whose exact NRC string equals quotes and OR.</li>
                             <li><strong>Why it works:</strong> Placeholder <code>?</code> treats input purely as a data literal.</li>
                             <li><strong>Result:</strong> 0 records matched. Attack completely neutralized!</li>
                         </ul>
@@ -380,36 +404,36 @@
             </div>
             <div class="slide-footer-bar">
                 <span>ZAMBIA UNIVERSITY COLLEGE OF TECHNOLOGY  •  BIT3360</span>
-                <span>Slide 5 of 12</span>
+                <span class="slide-num">Slide 5 of 12</span>
             </div>
         </section>
 
         <!-- SLIDE 6: Encryption & Triggers (GIDEON) -->
         <section class="slide">
-            <div class="slide-header-band">
+            <div class="slide-header">
                 <div class="topic-tag">Part 2: Defensive Controls</div>
                 <h2>Data Encryption & Tamper-Evident Audit Logging</h2>
                 <p class="subtitle">Protecting data on disk with encryption, and using database triggers to catch mark tampering.</p>
             </div>
             <div class="content-body">
                 <div class="grid-2">
-                    <div class="card highlight">
+                    <div class="card blue">
                         <h3>1. Cryptographic Protection (Hashing & Encryption)</h3>
-                        <div class="in-simple-terms">💡 If the database is stolen, the data cannot be read.</div>
+                        <div class="concept-tag">💡 If the database is stolen, the data cannot be read.</div>
                         <ul>
                             <li><strong>Password Hashing:</strong> Passwords stored using SHA-256 with salt. Even DBAs cannot reverse them.</li>
                             <li><strong>Data in Transit:</strong> TLS/SSL network encryption prevents eavesdropping.</li>
                             <li><strong>Data at Rest:</strong> Sensitive identity columns like NRC numbers can be encrypted so raw files on hard drives are protected.</li>
                         </ul>
                     </div>
-                    <div class="card success">
+                    <div class="card green">
                         <h3>2. Automated Database Triggers (Audit Trail)</h3>
-                        <div class="in-simple-terms">💡 A security camera recording every change in the database.</div>
+                        <div class="concept-tag">💡 A security camera recording every change in the database.</div>
                         <ul>
-                            <li>What if an authorized lecturer alters a student's grade from 40 to 85?</li>
-                            <li>We built an automatic trigger: <code>trg_grades_audit_update</code>.</li>
-                            <li>Every time an <code>UPDATE</code> occurs, the trigger silently records: <em>who did it, the exact timestamp, the old mark, and the new mark</em>.</li>
-                            <li><strong>Guarantees Non-Repudiation:</strong> Nobody can deny their actions.</li>
+                            <li><strong>Internal Threat:</strong> What if an insider alters a student's grade from 40 to 85?</li>
+                            <li><strong>Trigger Created:</strong> <code>trg_grades_audit_update</code> fires automatically on UPDATE.</li>
+                            <li><strong>Audit Record:</strong> The trigger silently records: <em>Changed By, Timestamp, Record ID, Old Score, and New Score</em>.</li>
+                            <li><strong>Non-Repudiation:</strong> 100% accountability is guaranteed—no one can deny their actions.</li>
                         </ul>
                     </div>
                 </div>
@@ -420,43 +444,44 @@
             </div>
             <div class="slide-footer-bar">
                 <span>ZAMBIA UNIVERSITY COLLEGE OF TECHNOLOGY  •  BIT3360</span>
-                <span>Slide 6 of 12</span>
+                <span class="slide-num">Slide 6 of 12</span>
             </div>
         </section>
 
         <!-- SLIDE 7: Industry Tools (LUBUTO) -->
         <section class="slide">
-            <div class="slide-header-band">
+            <div class="slide-header">
                 <div class="topic-tag">Part 3: Industry & Design</div>
                 <h2>Enterprise Database Security Systems & Tools</h2>
                 <p class="subtitle">How major enterprise environments implement these security controls at scale.</p>
             </div>
             <div class="content-body">
                 <div class="grid-3">
-                    <div class="card highlight">
+                    <div class="card blue">
                         <h3>MySQL Enterprise</h3>
-                        <div class="in-simple-terms">💡 Commercial security suite.</div>
+                        <div class="concept-tag">💡 Commercial security suite.</div>
                         <ul>
                             <li><strong>Enterprise Firewall:</strong> Inspects incoming SQL traffic and blocks injection attempts.</li>
-                            <li><strong>Transparent Data Encryption (TDE):</strong> Encrypts table data on hard drives automatically.</li>
-                            <li><strong>Enterprise Audit:</strong> Tamper-resistant compliance logging.</li>
+                            <li><strong>Transparent Data Encryption (TDE):</strong> Encrypts table data on hard drives automatically at rest.</li>
+                            <li><strong>Enterprise Audit:</strong> Tamper-resistant compliance logging and monitoring.</li>
                         </ul>
                     </div>
                     <div class="card amber">
                         <h3>PostgreSQL Security</h3>
-                        <div class="in-simple-terms">💡 Advanced open-source controls.</div>
+                        <div class="concept-tag">💡 Advanced open-source controls.</div>
                         <ul>
                             <li><strong>Row-Level Security (RLS):</strong> Automatically filters rows based on the logged-in user session.</li>
-                            <li><strong>pg_audit:</strong> Detailed logging of all administrative actions.</li>
-                            <li><strong>SCRAM-SHA-256:</strong> Modern authentication.</li>
+                            <li><strong>pg_audit:</strong> Detailed logging of all administrative DDL/DML actions.</li>
+                            <li><strong>SCRAM-SHA-256:</strong> Modern authentication standard.</li>
                         </ul>
                     </div>
-                    <div class="card success">
+                    <div class="card green">
                         <h3>Vault & DAM Systems</h3>
-                        <div class="in-simple-terms">💡 Password rotation & monitoring.</div>
+                        <div class="concept-tag">💡 Password rotation & monitoring.</div>
                         <ul>
                             <li><strong>HashiCorp Vault:</strong> Generates temporary database passwords that expire automatically (no hardcoded passwords).</li>
                             <li><strong>IBM Guardium / Imperva:</strong> Continuous traffic monitoring and anomaly alerts.</li>
+                            <li><strong>Key Rotation:</strong> Automated cryptographic secret rotation.</li>
                         </ul>
                     </div>
                 </div>
@@ -467,31 +492,31 @@
             </div>
             <div class="slide-footer-bar">
                 <span>ZAMBIA UNIVERSITY COLLEGE OF TECHNOLOGY  •  BIT3360</span>
-                <span>Slide 7 of 12</span>
+                <span class="slide-num">Slide 7 of 12</span>
             </div>
         </section>
 
         <!-- SLIDE 8: Benefits & Law (LUBUTO) -->
         <section class="slide">
-            <div class="slide-header-band">
+            <div class="slide-header">
                 <div class="topic-tag">Part 3: Industry & Design</div>
                 <h2>Benefits, Real-World Trade-offs & The Zambia Data Protection Act</h2>
                 <p class="subtitle">Balancing security with speed, and meeting Zambian legal requirements.</p>
             </div>
             <div class="content-body">
                 <div class="grid-2">
-                    <div class="card success">
+                    <div class="card green">
                         <h3>Key Benefits & Legal Compliance</h3>
-                        <div class="in-simple-terms">💡 Keeping the university reputable and compliant with law.</div>
+                        <div class="concept-tag">💡 Keeping the university reputable and compliant with law.</div>
                         <ul>
-                            <li><strong>Preserves Academic Standing:</strong> Prevents unauthorized grade inflation or bribery.</li>
+                            <li><strong>Preserves Academic Standing:</strong> Prevents unauthorized grade inflation, unauthorized alterations, or bribery.</li>
                             <li><strong>The Zambia Data Protection Act No. 3 of 2021:</strong> Legally requires universities handling personal records (such as <strong>NRC numbers</strong>) to enforce technical security.</li>
                             <li><strong>Damage Containment:</strong> Even if a student account is compromised, RBAC prevents privilege escalation.</li>
                         </ul>
                     </div>
                     <div class="card amber">
                         <h3>Real-World Challenges & Costs</h3>
-                        <div class="in-simple-terms">💡 Security always has costs you have to manage.</div>
+                        <div class="concept-tag">💡 Security always has costs you have to manage.</div>
                         <ul>
                             <li><strong>Performance Overhead:</strong> Running audit triggers on every update and encrypting columns consumes CPU and disk resources.</li>
                             <li><strong>Privilege Management:</strong> Maintaining user roles across an expanding organization requires continuous administrative effort.</li>
@@ -506,22 +531,22 @@
             </div>
             <div class="slide-footer-bar">
                 <span>ZAMBIA UNIVERSITY COLLEGE OF TECHNOLOGY  •  BIT3360</span>
-                <span>Slide 8 of 12</span>
+                <span class="slide-num">Slide 8 of 12</span>
             </div>
         </section>
 
         <!-- SLIDE 9: Prototype Architecture (LUBUTO) -->
         <section class="slide">
-            <div class="slide-header-band">
+            <div class="slide-header">
                 <div class="topic-tag">Part 3: Industry & Design</div>
                 <h2>Our Prototype Design: ZUT Student Records System</h2>
                 <p class="subtitle">How our database tables, roles, and security measures fit together.</p>
             </div>
             <div class="content-body">
                 <div class="grid-2">
-                    <div class="card highlight">
+                    <div class="card blue">
                         <h3>Database Schema & Entities</h3>
-                        <div class="in-simple-terms">💡 Models real academic university entities.</div>
+                        <div class="concept-tag">💡 Models real academic university entities.</div>
                         <ul>
                             <li><code>students</code>: student_id, student_number, <strong>nrc</strong>, full_name, program, year_of_study, email.</li>
                             <li><code>courses</code>: course_code (e.g. BIT3360), course_name, credits, lecturer_name.</li>
@@ -529,13 +554,14 @@
                             <li><code>audit_log</code>: log_id, action_type, table_name, record_id, changed_by, old_value, new_value, timestamp.</li>
                         </ul>
                     </div>
-                    <div class="card success">
+                    <div class="card green">
                         <h3>The 3 Implemented Defenses</h3>
-                        <div class="in-simple-terms">💡 Proving the concepts through working code.</div>
+                        <div class="concept-tag">💡 Proving the concepts through working code.</div>
                         <ul>
                             <li><strong>1. RBAC Matrix:</strong> <code>sec_admin</code> (Full), <code>sec_lecturer</code> (Grades only), <code>sec_student</code> (Sanitized view, NRC masked).</li>
                             <li><strong>2. Parameterized Query Engine:</strong> Protects the student search box against SQL injection attacks.</li>
                             <li><strong>3. Automated Audit Trigger:</strong> Automatically records grade changes into <code>audit_log</code>.</li>
+                            <li><strong>Demonstration Hand-Off:</strong> Now, Lamla Mwanza will walk you through the live demonstration of this system.</li>
                         </ul>
                     </div>
                 </div>
@@ -546,42 +572,42 @@
             </div>
             <div class="slide-footer-bar">
                 <span>ZAMBIA UNIVERSITY COLLEGE OF TECHNOLOGY  •  BIT3360</span>
-                <span>Slide 9 of 12</span>
+                <span class="slide-num">Slide 9 of 12</span>
             </div>
         </section>
 
         <!-- SLIDE 10: Live Demo 1 (LAMLA) -->
         <section class="slide">
-            <div class="slide-header-band">
+            <div class="slide-header">
                 <div class="topic-tag">Part 4: Live Demonstration</div>
                 <h2>Live Demonstration: Role-Based Access Control in Action</h2>
                 <p class="subtitle">Testing what each user can and cannot do live in our prototype.</p>
             </div>
             <div class="content-body">
                 <div class="grid-3">
-                    <div class="card highlight">
+                    <div class="card blue">
                         <h3>Test 1: Administrator</h3>
-                        <div class="in-simple-terms">💡 Full DBA privileges.</div>
+                        <div class="concept-tag">💡 Full DBA privileges.</div>
                         <ul>
-                            <li>Action: View students & NRCs &rarr; <strong>[ALLOWED]</strong></li>
-                            <li>Action: View audit trail &rarr; <strong>[ALLOWED]</strong></li>
+                            <li><strong>Action:</strong> View students & NRCs &rarr; <span style="color:var(--accent-green); font-weight:700;">[ALLOWED]</span></li>
+                            <li><strong>Action:</strong> View audit trail &rarr; <span style="color:var(--accent-green); font-weight:700;">[ALLOWED]</span></li>
                             <li>Can manage users, schema, and backups.</li>
                         </ul>
                     </div>
                     <div class="card amber">
                         <h3>Test 2: Lecturer</h3>
-                        <div class="in-simple-terms">💡 Allowed to grade, blocked from destruction.</div>
+                        <div class="concept-tag">💡 Allowed to grade, blocked from destruction.</div>
                         <ul>
-                            <li>Action: Update student mark &rarr; <strong>[ALLOWED]</strong> (Trigger fires).</li>
-                            <li>Action: DROP TABLE students &rarr; <strong>[ACCESS DENIED Error 1142]</strong> Blocked by DB engine!</li>
+                            <li><strong>Action:</strong> Update student mark &rarr; <span style="color:var(--accent-green); font-weight:700;">[ALLOWED]</span> (Trigger fires).</li>
+                            <li><strong>Action:</strong> DROP TABLE students &rarr; <span style="color:var(--accent-red); font-weight:700;">[ACCESS DENIED Error 1142]</span> Blocked by DB engine!</li>
                         </ul>
                     </div>
-                    <div class="card danger">
+                    <div class="card red">
                         <h3>Test 3: Student</h3>
-                        <div class="in-simple-terms">💡 Least privilege enforced.</div>
+                        <div class="concept-tag">💡 Least privilege enforced.</div>
                         <ul>
-                            <li>Action: View grades view &rarr; <strong>[ALLOWED]</strong> (Sanitized view).</li>
-                            <li>Action: Alter student grade &rarr; <strong>[ACCESS DENIED Error 1142]</strong> Blocked immediately!</li>
+                            <li><strong>Action:</strong> View grades view &rarr; <span style="color:var(--accent-green); font-weight:700;">[ALLOWED]</span> (Sanitized view).</li>
+                            <li><strong>Action:</strong> Alter student grade &rarr; <span style="color:var(--accent-red); font-weight:700;">[ACCESS DENIED Error 1142]</span> Blocked immediately!</li>
                         </ul>
                     </div>
                 </div>
@@ -592,30 +618,30 @@
             </div>
             <div class="slide-footer-bar">
                 <span>ZAMBIA UNIVERSITY COLLEGE OF TECHNOLOGY  •  BIT3360</span>
-                <span>Slide 10 of 12</span>
+                <span class="slide-num">Slide 10 of 12</span>
             </div>
         </section>
 
         <!-- SLIDE 11: Live Demo 2 (LAMLA) -->
         <section class="slide">
-            <div class="slide-header-band">
+            <div class="slide-header">
                 <div class="topic-tag">Part 4: Live Demonstration</div>
                 <h2>Live Demonstration: SQL Injection Defense & Audit Trail</h2>
                 <p class="subtitle">Testing the attack live on screen, and inspecting the audit trail.</p>
             </div>
             <div class="content-body">
                 <div class="grid-2">
-                    <div class="card danger">
+                    <div class="card red">
                         <h3>SQL Injection Attack vs Defense</h3>
-                        <div class="in-simple-terms">💡 Testing payload: ' OR '1'='1 in the NRC search box.</div>
+                        <div class="concept-tag">💡 Testing payload: ' OR '1'='1 in the NRC search box.</div>
                         <ul>
                             <li><strong>Test A (Vulnerable Query):</strong> String concatenation causes the WHERE condition to evaluate as TRUE for all rows. <strong>Critical Data Breach!</strong> All student NRCs, emails, and names are dumped.</li>
                             <li><strong>Test B (Parameterized Query):</strong> Database compiles the query first. The input is treated strictly as plain literal text. <strong>0 records leaked. Attack 100% neutralized!</strong></li>
                         </ul>
                     </div>
-                    <div class="card success">
+                    <div class="card green">
                         <h3>Tamper-Evident Audit Trail</h3>
-                        <div class="in-simple-terms">💡 Inspecting the audit_log table live.</div>
+                        <div class="concept-tag">💡 Inspecting the audit_log table live.</div>
                         <ul>
                             <li>When the lecturer modified student 1's mark from 78.50 to 95.00, our database trigger automatically fired.</li>
                             <li>Querying <code>audit_log</code> shows: <em>Log ID #2 | UPDATE | Changed By: sec_lecturer | Old Mark: 78.50 | New Mark: 95.00 | Exact Timestamp</em>.</li>
@@ -630,13 +656,13 @@
             </div>
             <div class="slide-footer-bar">
                 <span>ZAMBIA UNIVERSITY COLLEGE OF TECHNOLOGY  •  BIT3360</span>
-                <span>Slide 11 of 12</span>
+                <span class="slide-num">Slide 11 of 12</span>
             </div>
         </section>
 
         <!-- SLIDE 12: Conclusion & References (LAMLA) -->
         <section class="slide">
-            <div class="slide-header-band">
+            <div class="slide-header">
                 <div class="topic-tag">Part 4: Conclusion</div>
                 <h2>Challenges Encountered, Conclusion & References</h2>
                 <p class="subtitle">What we learned building this prototype, and closing remarks.</p>
@@ -645,16 +671,16 @@
                 <div class="grid-2">
                     <div class="card amber">
                         <h3>Challenges & How We Solved Them</h3>
-                        <div class="in-simple-terms">💡 Practical lessons learned during development.</div>
+                        <div class="concept-tag">💡 Practical lessons learned during development.</div>
                         <ul>
                             <li><strong>Challenge 1:</strong> Capturing true user identity in triggers &rarr; Solved by passing session context into the audit logging mechanism.</li>
                             <li><strong>Challenge 2:</strong> Masking confidential NRC numbers &rarr; Solved by creating sanitized Views (<code>vw_student_grades</code>) separating presentation from base tables.</li>
                             <li><strong>Challenge 3:</strong> Portability &rarr; Engineered a zero-dependency web portal that runs locally on Python on any machine.</li>
                         </ul>
                     </div>
-                    <div class="card success">
+                    <div class="card green">
                         <h3>Conclusion & Consulted References</h3>
-                        <div class="in-simple-terms">💡 Key takeaway for modern database systems.</div>
+                        <div class="concept-tag">💡 Key takeaway for modern database systems.</div>
                         <ul>
                             <li><strong>Key Takeaway:</strong> Proactive database security—combining RBAC, Parameterized Queries, and Audit Logging—is essential to protect institutional integrity and comply with the Zambia Data Protection Act.</li>
                             <li><strong>References:</strong></li>
@@ -672,7 +698,7 @@
             </div>
             <div class="slide-footer-bar">
                 <span>ZAMBIA UNIVERSITY COLLEGE OF TECHNOLOGY  •  BIT3360</span>
-                <span>Slide 12 of 12</span>
+                <span class="slide-num">Slide 12 of 12</span>
             </div>
         </section>
 
@@ -687,7 +713,7 @@
         <div class="btn-group">
             <button class="nav-btn" id="prev-btn" onclick="changeSlide(-1)">&#8592; Previous</button>
             <button class="nav-btn" id="next-btn" onclick="changeSlide(1)">Next &#8594;</button>
-            <button class="nav-btn" style="background: var(--accent);" onclick="window.print()">Print / Save PDF</button>
+            <button class="nav-btn" style="background: var(--accent-blue); border-color: var(--accent-blue);" onclick="window.print()">Print / Save PDF</button>
         </div>
     </div>
 
