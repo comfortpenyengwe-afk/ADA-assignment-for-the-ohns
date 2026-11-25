@@ -5,30 +5,41 @@
 
 ---
 
-## 1. Project Overview & Deliverables
-This repository contains the complete deliverables for the **BIT3360: Advanced Databases** group coursework on **Database Security**:
+## Group Members
 
-1. **`BIT3360_Database_Security_Presentation.pptx`**: The official, standalone Microsoft PowerPoint presentation file (13 slides with embedded speaker notes).
-2. **`web_app.py`**: **(Recommended Demo)** A zero-dependency visual web portal (`http://localhost:5000`) designed for ZUT to demonstrate Access Control, SQL Injection attacks vs defenses, and live audit triggers in a real browser.
-3. **`security_demo.py`**: An interactive terminal/CLI version of the security prototype.
-4. **`database_security.sql`**: Full MySQL DDL/DML script with tables (`students` with `nrc`, `courses`, `grades`, `audit_log`), sample data, RBAC user definitions, and automated audit triggers.
-5. **`presentation.html`**: A web version of the 13-slide presentation deck (can be presented directly or printed to PDF).
-6. **`PRESENTATION_GUIDE.md`**: Slide-by-slide word-for-word speaker notes divided among **5 group members**.
+| Name | Student ID |
+|---|---|
+| Comfort Penyengwe | 2410098 |
+| Gideon Namuya | 2410149 |
+| Lubuto Matambo | 2410171 |
+| Lamla Mwanza | 2410205 |
 
 ---
 
-## 2. How to Run the Visual Web Portal (Recommended for Presentation)
+## 1. Project Overview & Deliverables
+This repository contains the deliverables for the **BIT3360: Advanced Databases** group coursework on **Database Security**:
 
-Simply run:
+1. **`BIT3360_Database_Security_Presentation.pptx`**: Standalone Microsoft PowerPoint presentation deck (12 slides).
+2. **`web_app.py`**: Zero-dependency interactive web portal (`http://localhost:5000`) built for the ZUT Student Records System (`zut_student_records`) to demonstrate Role-Based Access Control (RBAC), SQL Injection attacks vs. parameterized query defenses, and live audit triggers.
+3. **`security_demo.py`**: Interactive terminal/CLI version of the security prototype.
+4. **`database_security.sql`**: Full SQL DDL/DML script defining tables (`students` with `nrc`, `courses`, `grades`, `audit_log`), sample data, RBAC roles (`sec_admin`, `sec_lecturer`, `sec_student`), sanitized views (`vw_student_grades`), and automated audit triggers.
+5. **`presentation.html`**: Browser-based version of the 12-slide presentation deck.
+
+---
+
+## 2. How to Run the Web Portal
+
+Run:
 ```powershell
 python web_app.py
 ```
-* Your web browser will automatically open to `http://localhost:5000`.
-* You can switch between 4 interactive tabs during your presentation:
-  * **Tab 1: Access Control (RBAC):** Click **Student** and try to change a grade $\rightarrow$ triggers a red **`ACCESS DENIED (Error 1142)`** alert box. Then click **Lecturer** $\rightarrow$ shows green success box.
-  * **Tab 2: SQL Injection Defense:** Click **`Payload: ' OR '1'='1`**. Test on the vulnerable query $\rightarrow$ leaks all student NRCs. Then test on the parameterized query $\rightarrow$ attack is completely neutralized.
-  * **Tab 3: Tamper-Evident Audit Trail:** Trigger a grade change and watch the live `audit_log` record the timestamp, user, previous mark, and new mark.
-  * **Tab 4: Viva Guide:** Quick reference for your group members during the presentation.
+* Your browser will open to `http://localhost:5000`.
+* Available modules:
+  * **1. Access Control (RBAC) & Query Inspector:** Switch between `sec_admin`, `sec_lecturer`, and `sec_student`. Students are restricted to viewing only their own grades and are blocked from viewing peer records or modifying marks (`Error 1142: Access Denied`).
+  * **2. SQL Injection vs Parameterized Queries:** Test malicious payloads (e.g., `' OR '1'='1`) against vulnerable string concatenation versus pre-compiled parameterized queries.
+  * **3. Tamper-Evident Audit Trail & Triggers:** Trigger grade updates and inspect the `audit_log` table populated automatically by `trg_audit_grade_update`.
+  * **4. Full SQL Schema & Source Viewer:** Inspect the full `database_security.sql` schema and privilege definitions.
+  * **5. Security Architecture:** Summary of the implemented defense layers and compliance with the **Zambia Data Protection Act No. 3 of 2021**.
 
 ---
 
@@ -78,13 +89,3 @@ python web_app.py
                             | timestamp       (DATETIME)        |
                             +-----------------------------------+
 ```
-
----
-
-## 4. How to Present the Project (5-Minute Group Script)
-
-1. **Member 1 (Intro & Threats):** Introduce the system and explain why database security is vital (protecting student NRCs from theft and marks from tampering).
-2. **Member 2 (Defensive Theory):** Explain Role-Based Access Control (Principle of Least Privilege) and Parameterized Queries (separating SQL code from data).
-3. **Member 3 (Architecture):** Explain the relational tables and the three database accounts (`sec_admin`, `sec_lecturer`, `sec_student`).
-4. **Member 4 (Live Demo):** Share the screen on `http://localhost:5000` (run via `python web_app.py`) and click the buttons on Tab 1, 2, and 3.
-5. **Member 5 (Compliance & Close):** Explain the audit logging mechanism, reference the **Zambia Data Protection Act No. 3 of 2021**, and conclude.
