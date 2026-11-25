@@ -160,8 +160,13 @@ ACTION_DETAILS = {
     },
     "VIEW_GRADES": {
         "sql": "SELECT s.full_name, g.course_code, g.mark, g.grade_letter, g.semester FROM grades g JOIN students s ON g.student_id = s.student_id;",
-        "purpose": "Queries grade standings. For students, this queries a sanitized database View (vw_student_grades).",
+        "purpose": "Queries grade standings for all students. Lecturers and admins see the full grades table.",
         "why_denied": "Permitted for all authenticated roles."
+    },
+    "VIEW_GRADES_STUDENT": {
+        "sql": "SELECT g.course_code, g.mark, g.grade_letter, g.semester FROM grades g WHERE g.student_id = ? -- (bound to the logged-in student's own ID only)",
+        "purpose": "Student-restricted query. The student role can ONLY retrieve rows where student_id matches their own session ID. Peer grades are completely invisible.",
+        "why_denied": "Permitted — but filtered to own records only via Row-Level Security."
     },
     "UPDATE_GRADE": {
         "sql": "UPDATE grades SET mark = 95.0, grade_letter = 'A+' WHERE grade_id = 1;",
@@ -534,13 +539,8 @@ INDEX_HTML = """<!DOCTYPE html>
                 <p>BIT3360 Advanced Databases - Security Prototype Portal</p>
             </div>
         </div>
-        <div style="display: flex; gap: 10px;">
-            <a href="/download/presentation.pptx" class="btn-download-hero" download="BIT3360_Database_Security_Presentation.pptx">
-                &#128190; Download PowerPoint (.pptx)
-            </a>
-            <a href="/download/database_security.sql" class="btn-download-hero" style="background: #3b82f6;" download="database_security.sql">
-                &#128196; Download SQL Script
-            </a>
+        <div style="display: flex; align-items: center;">
+            <span style="background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.3); padding: 6px 14px; border-radius: 9999px; font-size: 0.82rem; font-weight: 600;">&#9679; System Online &bull; DB Connected</span>
         </div>
     </header>
 
@@ -549,7 +549,7 @@ INDEX_HTML = """<!DOCTYPE html>
         <button class="tab-btn" onclick="switchTab('sqli')">2. SQL Injection vs Parameterized Queries</button>
         <button class="tab-btn" onclick="switchTab('audit')">3. Tamper-Evident Audit Trail & Triggers</button>
         <button class="tab-btn" onclick="switchTab('sql-source')">4. Full SQL Schema & Source Viewer</button>
-        <button class="tab-btn" onclick="switchTab('guide')">5. Presentation & Submission Files</button>
+        <button class="tab-btn" onclick="switchTab('guide')">5. Security Architecture</button>
     </div>
 
     <main class="container">
@@ -708,14 +708,8 @@ END;</div>
         <div id="tab-sql-source" class="tab-pane">
             <div class="card">
                 <div class="card-header">
-                    <h2>Full SQL Script & Access Control Definitions (`database_security.sql`)</h2>
-                    <p>Show this screen to the lecturer if they ask to see the underlying schema, table definitions, and user privileges.</p>
-                </div>
-
-                <div style="margin-bottom: 14px;">
-                    <a href="/download/database_security.sql" class="btn-primary" download="database_security.sql" style="text-decoration: none;">
-                        &#128196; Download Full database_security.sql File
-                    </a>
+                    <h2>Full SQL Schema & Access Control Definitions (<code>database_security.sql</code>)</h2>
+                    <p>Underlying database schema, table definitions, user privileges, and automated triggers.</p>
                 </div>
 
                 <div class="code-box" style="height: 480px; overflow-y: auto; font-size: 0.85rem;" id="sql-source-box">
@@ -725,28 +719,13 @@ END;</div>
         </div>
 
         <!-- ========================================== -->
-        <!-- TAB 5: PRESENTATION & SUBMISSION FILES -->
+        <!-- TAB 5: SECURITY ARCHITECTURE -->
         <!-- ========================================== -->
         <div id="tab-guide" class="tab-pane">
             <div class="card">
                 <div class="card-header">
-                    <h2>Project Overview & Official Submission Deliverables</h2>
-                    <p>Official course materials and presentation deliverables for BIT3360: Advanced Databases.</p>
-                </div>
-
-                <div style="background: #eff6ff; border: 1px solid #bfdbfe; padding: 18px; border-radius: 8px; margin-bottom: 20px;">
-                    <h3 style="color: #1e40af; margin-bottom: 8px;">Download Official Submission Files:</h3>
-                    <div style="display: flex; gap: 14px; flex-wrap: wrap;">
-                        <a href="/download/presentation.pptx" class="btn-download-hero" download="BIT3360_Database_Security_Presentation.pptx">
-                            &#128190; Download PowerPoint Presentation (.pptx)
-                        </a>
-                        <a href="/download/database_security.sql" class="btn-download-hero" style="background: #2563eb;" download="database_security.sql">
-                            &#128196; Download database_security.sql
-                        </a>
-                        <a href="/presentation.html" target="_blank" class="btn-download-hero" style="background: #475569;">
-                            &#127760; View Slides in Browser
-                        </a>
-                    </div>
+                    <h2>System Security Architecture & Compliance</h2>
+                    <p>Core security layers implemented for the ZUT Student Records System (BIT3360: Advanced Databases).</p>
                 </div>
 
                 <div style="display: flex; flex-direction: column; gap: 14px;">
@@ -795,7 +774,7 @@ END;</div>
             const descs = {
                 "admin": "Database Administrator (DBA) - Full Access (GRANT ALL PRIVILEGES)",
                 "lecturer": "Lecturer (sec_lecturer) - Grade Updating Permitted; Destructive Actions Prohibited",
-                "student": "Student (sec_student) - Read-Only Access; NRC Masked; Modifications Forbidden"
+                "student": "Student (sec_student, Logged in as: Chileshe Mwape) - Own Grades Only; Peer Records & Modifications Forbidden"
             };
             document.getElementById('active-role-desc').innerText = descs[role];
             document.getElementById('rbac-alert').style.display = 'none';
@@ -1052,10 +1031,22 @@ class SecurityAppHandler(http.server.SimpleHTTPRequestHandler):
                     cols = ["ID", "Student Number", "NRC", "Full Name", "Email"]
                     msg = f"Operation permitted for role '{role}'. Confidential student registry retrieved."
                 elif action == "VIEW_GRADES":
-                    cur.execute("SELECT s.full_name, g.course_code, g.mark, g.grade_letter, g.semester FROM grades g JOIN students s ON g.student_id = s.student_id")
-                    rows = cur.fetchall()
-                    cols = ["Student Name", "Course", "Mark", "Grade Letter", "Semester"]
-                    msg = f"Operation permitted for role '{role}'. Grades list retrieved."
+                    if role == "student":
+                        # Row-Level Security: students can ONLY see their own grades (simulated as student_id = 1)
+                        LOGGED_IN_STUDENT_ID = 1
+                        cur.execute(
+                            "SELECT g.course_code, g.mark, g.grade_letter, g.semester FROM grades g WHERE g.student_id = ?",
+                            (LOGGED_IN_STUDENT_ID,)
+                        )
+                        rows = cur.fetchall()
+                        cols = ["Course", "Mark", "Grade Letter", "Semester"]
+                        msg = "Grades retrieved for your own account only. Row-Level Security is enforced — peer records are not accessible."
+                        action_info = ACTION_DETAILS.get("VIEW_GRADES_STUDENT", action_info)
+                    else:
+                        cur.execute("SELECT s.full_name, g.course_code, g.mark, g.grade_letter, g.semester FROM grades g JOIN students s ON g.student_id = s.student_id")
+                        rows = cur.fetchall()
+                        cols = ["Student Name", "Course", "Mark", "Grade Letter", "Semester"]
+                        msg = f"Operation permitted for role '{role}'. Full grades list retrieved."
                 elif action == "UPDATE_GRADE":
                     cur.execute("UPDATE grades SET mark = 95.0, grade_letter = 'A+' WHERE grade_id = 1")
                     conn.commit()

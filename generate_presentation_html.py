@@ -726,7 +726,6 @@ HTML_CONTENT = """<!DOCTYPE html>
         <div class="btn-group">
             <button class="nav-btn" id="prev-btn" onclick="changeSlide(-1)">&#8592; Previous</button>
             <button class="nav-btn" id="next-btn" onclick="changeSlide(1)">Next &#8594;</button>
-            <button class="nav-btn" style="background: var(--accent-blue); border-color: var(--accent-blue);" onclick="window.print()">Print / Save PDF</button>
         </div>
     </div>
 
